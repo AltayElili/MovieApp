@@ -1,5 +1,7 @@
 package com.example.mova.presentation.ui.detail
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
@@ -133,6 +135,12 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
                 isButtonChecked = false
                 binding.buttonAddToList.isChecked = isButtonChecked
             }
+        }
+        binding.buttonDetailPlay.setOnClickListener {
+            val youtubeUrl = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl))
+            intent.putExtra("force_fullscreen", true)
+            startActivity(intent)
         }
     }
 
