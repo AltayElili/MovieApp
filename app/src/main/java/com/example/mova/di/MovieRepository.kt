@@ -11,10 +11,10 @@ import kotlinx.coroutines.tasks.await
 import retrofit2.Response
 import javax.inject.Inject
 
-class MovaRepository @Inject constructor(
+class MovieRepository @Inject constructor(
     private val service: MovaService,
     private val fireStore: FirebaseFirestore
-) {
+) { //Altay
 
     suspend fun getPopularMovies() = safeApiRequest {
         service.getPopularMovies()

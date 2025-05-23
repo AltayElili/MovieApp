@@ -10,10 +10,10 @@ import kotlinx.coroutines.flow.Flow
 interface MovieDAO {
 
     @Insert
-    fun addContent(movie: com.example.mova.local.Movie)
+    fun addContent(movie: Movie)
 
     @Query("SELECT * FROM movie_table")
-    fun getAllContent(): Flow<List<com.example.mova.local.Movie>>
+    fun getAllContent(): Flow<List<Movie>>
 
     @Insert
     fun addListedContentId(listedContent: ListedContent)

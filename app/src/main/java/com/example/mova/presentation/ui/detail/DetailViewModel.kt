@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mova.api.NetworkResponse
-import com.example.mova.di.MovaRepository
+import com.example.mova.di.MovieRepository
 import com.example.mova.local.ListedContent
 import com.example.mova.local.LocalRepository
 import com.example.mova.model.ActorResponse
@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val repository: MovaRepository,
+    private val repository: MovieRepository,
     private val localRepository: LocalRepository
 ) : ViewModel() {
 

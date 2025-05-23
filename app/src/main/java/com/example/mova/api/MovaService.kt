@@ -11,7 +11,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface MovaService {
+interface MovaService { //Altay - adlar deyisilmeli
 
     @GET("movie/popular")
     suspend fun getPopularMovies(): Response<MovieResponse>
@@ -39,6 +39,12 @@ interface MovaService {
 
     @GET("movie/{id}/credits")
     suspend fun getMovieActors(@Path("id") id: String): Response<ActorResponse>
+
+    @GET("movie/{id}/videos")
+    suspend fun getMovieVideosById(
+        @Path("id") movie_id:Long,
+        @Query("language") lan:String="en-US"
+    ): Response<MovieResponse>
 
     @GET("tv/{id}/credits")
     suspend fun getTvActors(@Path("id") id: String): Response<ActorResponse>
