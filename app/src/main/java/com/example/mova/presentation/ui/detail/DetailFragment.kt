@@ -8,10 +8,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.mova.base.BaseFragment
+import com.example.mova.db.BaseFragment
 import com.example.mova.databinding.FragmentDetailBinding
-import com.example.mova.local.ListedContent
-import com.example.mova.local.Movie
+import com.example.mova.data.model.local.ListedContent
+import com.example.mova.data.model.local.Movie
 import com.example.mova.presentation.ui.list.ListViewModel
 import com.example.mova.utils.gone
 import com.example.mova.utils.visible

@@ -11,7 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.mova.R
-import com.example.mova.base.BaseFragment
+import com.example.mova.db.BaseFragment
 import com.example.mova.databinding.FragmentEditProfileBinding
 import com.example.mova.model.Account
 import com.example.mova.presentation.ui.profile.myProfile.ProfileViewModel

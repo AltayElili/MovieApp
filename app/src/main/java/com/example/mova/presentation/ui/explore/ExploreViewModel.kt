@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mova.api.NetworkResponse
-import com.example.mova.di.MovieRepository
+import com.example.mova.data.repository.MovieRepositoryImpl
 import com.example.mova.model.TvSeries
 import com.example.mova.presentation.ui.home.MovieUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ExploreViewModel @Inject constructor(private val repository: MovieRepository) : ViewModel() {
+class ExploreViewModel @Inject constructor(private val repository: MovieRepositoryImpl) : ViewModel() {
 
     val movieSearchState = MutableLiveData<MovieUiState>()
     val tvSearchState = MutableLiveData<TvSeriesUiState>()

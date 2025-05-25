@@ -3,8 +3,8 @@ package com.example.mova.presentation.ui.list
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mova.local.LocalRepository
-import com.example.mova.local.Movie
+import com.example.mova.data.repository.LocalRepositoryImpl
+import com.example.mova.data.model.local.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ListViewModel @Inject constructor(private val localRepository: LocalRepository) :
+class ListViewModel @Inject constructor(private val localRepository: LocalRepositoryImpl) :
     ViewModel() {
 
     val movieList = MutableLiveData<List<Movie>>()

@@ -1,6 +1,5 @@
 package com.example.mova.model
 
-import android.net.Uri
 import com.google.firebase.firestore.PropertyName
 
 data class Account(

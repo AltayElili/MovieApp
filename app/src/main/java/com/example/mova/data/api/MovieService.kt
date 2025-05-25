@@ -11,7 +11,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface MovaService { //Altay - adlar deyisilmeli
+interface MovieService {
 
     @GET("movie/popular")
     suspend fun getPopularMovies(): Response<MovieResponse>

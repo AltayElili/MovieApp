@@ -4,6 +4,8 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import com.example.mova.data.model.local.ListedContent
+import com.example.mova.data.model.local.Movie
 import kotlinx.coroutines.flow.Flow
 
 @Dao

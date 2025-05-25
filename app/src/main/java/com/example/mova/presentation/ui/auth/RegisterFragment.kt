@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.mova.base.BaseFragment
+import com.example.mova.db.BaseFragment
 import com.example.mova.databinding.FragmentRegisterBinding
 import com.example.mova.utils.gone
 import com.example.mova.utils.visible

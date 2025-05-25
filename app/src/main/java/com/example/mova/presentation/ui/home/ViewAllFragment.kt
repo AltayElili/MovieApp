@@ -5,7 +5,7 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.mova.R
-import com.example.mova.base.BaseFragment
+import com.example.mova.db.BaseFragment
 import com.example.mova.databinding.FragmentViewAllBinding
 import com.example.mova.model.Movie
 import dagger.hilt.android.AndroidEntryPoint

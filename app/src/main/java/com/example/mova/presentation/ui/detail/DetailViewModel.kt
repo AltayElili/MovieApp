@@ -4,9 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mova.api.NetworkResponse
-import com.example.mova.di.MovieRepository
-import com.example.mova.local.ListedContent
-import com.example.mova.local.LocalRepository
+import com.example.mova.data.repository.MovieRepositoryImpl
+import com.example.mova.data.model.local.ListedContent
+import com.example.mova.data.repository.LocalRepositoryImpl
 import com.example.mova.model.ActorResponse
 import com.example.mova.model.DetailResponse
 import com.example.mova.model.Review
@@ -20,8 +20,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val repository: MovieRepository,
-    private val localRepository: LocalRepository
+    private val repository: MovieRepositoryImpl,
+    private val localRepository: LocalRepositoryImpl
 ) : ViewModel() {
 
     val movieDetailState = MutableLiveData<MovieDetailUiState>()

@@ -6,7 +6,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ListAdapter
-import com.example.mova.base.BaseFragment
+import com.example.mova.db.BaseFragment
 import com.example.mova.databinding.FragmentExploreBinding
 import com.example.mova.presentation.ui.home.MovieAdapter
 import com.example.mova.presentation.ui.home.MovieUiState
