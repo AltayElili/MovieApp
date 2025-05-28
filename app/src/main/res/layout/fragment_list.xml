@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/primary_background_color"
     android:paddingBottom="95dp"
-    tools:context=".presentation.ui.details.auth.list.ListFragment">
+    tools:context=".presentation.ui.list.ListFragment">
 
 
     <ImageView
@@ -15,7 +15,7 @@
         android:layout_height="35dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="45dp"
-        android:src="@drawable/splashlogo"
+        android:src="@drawable/netflixlogo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
