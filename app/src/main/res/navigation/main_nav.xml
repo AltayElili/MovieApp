@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.example.mova.presentation.ui.splash.SplashFragment"
+        android:name="com.example.movie.presentation.ui.splash.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash">
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.example.mova.presentation.ui.splash.WelcomeFragment"
+        android:name="com.example.movie.presentation.ui.splash.WelcomeFragment"
         android:label="fragment_welcome"
         tools:layout="@layout/fragment_welcome">
         <action
@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/authFragment"
-        android:name="com.example.mova.presentation.ui.auth.AuthFragment"
+        android:name="com.example.movie.presentation.ui.auth.AuthFragment"
         android:label="fragment_auth"
         tools:layout="@layout/fragment_auth">
         <action
@@ -47,7 +47,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.mova.presentation.ui.auth.LoginFragment"
+        android:name="com.example.movie.presentation.ui.auth.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
         <action
@@ -63,7 +63,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.mova.presentation.ui.auth.RegisterFragment"
+        android:name="com.example.movie.presentation.ui.auth.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register">
 
@@ -80,7 +80,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.mova.presentation.ui.home.HomeFragment"
+        android:name="com.example.movie.presentation.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home">
         <action
@@ -95,7 +95,7 @@
     </fragment>
     <fragment
         android:id="@+id/viewAllFragment"
-        android:name="com.example.mova.presentation.ui.home.ViewAllFragment"
+        android:name="com.example.movie.presentation.ui.home.ViewAllFragment"
         android:label="fragment_view_all"
         tools:layout="@layout/fragment_view_all">
         <action
@@ -103,7 +103,7 @@
             app:destination="@id/homeFragment" />
         <argument
             android:name="movies"
-            app:argType="com.example.mova.model.Movie[]" />
+            app:argType="com.example.movie.model.Movie[]" />
         <argument
             android:name="title"
             app:argType="string" />
@@ -113,7 +113,7 @@
     </fragment>
     <fragment
         android:id="@+id/notificationFragment"
-        android:name="com.example.mova.presentation.ui.notification.NotificationFragment"
+        android:name="com.example.movie.presentation.ui.notification.NotificationFragment"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification">
         <action
@@ -122,7 +122,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.mova.presentation.ui.detail.DetailFragment"
+        android:name="com.example.movie.presentation.ui.detail.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail">
         <argument
@@ -135,7 +135,7 @@
     </fragment>
     <fragment
         android:id="@+id/exploreFragment"
-        android:name="com.example.mova.presentation.ui.explore.ExploreFragment"
+        android:name="com.example.movie.presentation.ui.explore.ExploreFragment"
         android:label="fragment_explore"
         tools:layout="@layout/fragment_explore">
         <action
@@ -144,12 +144,12 @@
     </fragment>
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.mova.presentation.ui.list.ListFragment"
+        android:name="com.example.movie.presentation.ui.list.ListFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.mova.presentation.ui.profile.myProfile.ProfileFragment"
+        android:name="com.example.movie.presentation.ui.profile.myProfile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile">
         <action
@@ -172,7 +172,7 @@
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
-        android:name="com.example.mova.presentation.ui.profile.editProfile.EditProfileFragment"
+        android:name="com.example.movie.presentation.ui.profile.editProfile.EditProfileFragment"
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile">
         <action
@@ -183,7 +183,7 @@
     </fragment>
     <fragment
         android:id="@+id/fillProfileFragment"
-        android:name="com.example.mova.presentation.ui.profile.fillProfile.FillProfileFragment"
+        android:name="com.example.movie.presentation.ui.profile.fillProfile.FillProfileFragment"
         android:label="fragment_fill_profile"
         tools:layout="@layout/fragment_fill_profile">
         <action
@@ -199,7 +199,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileNotificationFragment"
-        android:name="com.example.mova.presentation.ui.profile.myProfile.ProfileNotificationFragment"
+        android:name="com.example.movie.presentation.ui.profile.myProfile.ProfileNotificationFragment"
         android:label="fragment_profile_notification"
         tools:layout="@layout/fragment_profile_notification">
         <action
@@ -210,7 +210,7 @@
     </fragment>
     <fragment
         android:id="@+id/helpFragment"
-        android:name="com.example.mova.presentation.ui.profile.help.HelpFragment"
+        android:name="com.example.movie.presentation.ui.profile.help.HelpFragment"
         android:label="fragment_help"
         tools:layout="@layout/fragment_help">
         <action
@@ -221,7 +221,7 @@
     </fragment>
     <fragment
         android:id="@+id/privacyFragment"
-        android:name="com.example.mova.presentation.ui.profile.privacy.PrivacyFragment"
+        android:name="com.example.movie.presentation.ui.profile.privacy.PrivacyFragment"
         android:label="fragment_privacy"
         tools:layout="@layout/fragment_privacy">
         <action

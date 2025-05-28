@@ -6,7 +6,7 @@
 
         <variable
             name="review"
-            type="com.example.mova.model.Review" />
+            type="com.example.movie.model.Review" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

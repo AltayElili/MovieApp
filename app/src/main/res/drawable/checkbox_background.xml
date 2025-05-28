@@ -3,7 +3,7 @@
 
     <item android:drawable="@drawable/check_off" android:state_checked="false" />
 
-    <item android:drawable="@drawable/check_on" android:state_checked="true" />
+    <item android:drawable="@drawable/check_on" android:state_checked="true"/>
 
     <item android:drawable="@drawable/check_off" />
 

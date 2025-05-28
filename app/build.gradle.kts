@@ -10,7 +10,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.mova"
+    namespace = "com.example.movie"
     compileSdk = 34
 
     buildFeatures {
@@ -19,7 +19,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.mova"
+        applicationId = "com.example.movie"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

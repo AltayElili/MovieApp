@@ -6,7 +6,7 @@
 
         <variable
             name="actor"
-            type="com.example.mova.model.Cast" />
+            type="com.example.movie.model.Cast" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

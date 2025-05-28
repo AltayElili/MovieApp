@@ -7,11 +7,11 @@
 
         <variable
             name="movie"
-            type="com.example.mova.model.DetailResponse" />
+            type="com.example.movie.model.DetailResponse" />
 
         <variable
             name="tvSeries"
-            type="com.example.mova.model.TvDetailsResponse" />
+            type="com.example.movie.model.TvDetailsResponse" />
     </data>
 
     <ScrollView

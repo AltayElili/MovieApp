@@ -7,7 +7,7 @@
 
         <variable
             name="tvShow"
-            type="com.example.mova.model.TvSeries" />
+            type="com.example.movie.model.TvSeries" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

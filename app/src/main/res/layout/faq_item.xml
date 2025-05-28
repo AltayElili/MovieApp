@@ -6,7 +6,7 @@
 
         <variable
             name="faq"
-            type="com.example.mova.presentation.ui.profile.help.FAQ" />
+            type="com.example.movie.presentation.ui.profile.help.FAQ" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
