@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Mova</string>
     <string name="welcome_description">The best movie streaming app of the century to make your days great!</string>
-    <string name="welcome_to_mova">"Welcome to Mova"</string>
+    <string name="welcome_to_mova">"Welcome to Movie"</string>
     <string name="get_started">"Get Started"</string>
 
     <string name="lets_you_in">Let’s you in</string>
