@@ -3,7 +3,7 @@ package com.example.mova.presentation.ui.detail
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import com.example.mova.db.BaseFragment
+import com.example.mova.base.BaseFragment
 import com.example.mova.databinding.FragmentRelatedBinding
 import com.example.mova.presentation.ui.home.MovieAdapter
 import com.example.mova.presentation.ui.home.MovieUiState

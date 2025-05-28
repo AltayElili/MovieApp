@@ -5,16 +5,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mova.api.NetworkResponse
-import com.example.mova.data.repository.AuthRepositoryImpl
+import com.example.mova.di.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val authRepositoryImpl: AuthRepositoryImpl,
+    private val authRepository: AuthRepository,
     private val sharedPreferences: SharedPreferences
 ) : ViewModel() {
 
@@ -23,8 +22,8 @@ class LoginViewModel @Inject constructor(
 
     fun loginUser(email: String, password: String) {
         if (email.isNotEmpty() && password.isNotEmpty()) {
-            viewModelScope.launch(Dispatchers.IO) {
-                authRepositoryImpl.login(email, password).collectLatest {
+            viewModelScope.launch {
+                authRepository.login(email, password).collectLatest {
                     when (it) {
                         is NetworkResponse.Loading -> uiState.value = LoginUiState.Loading
                         is NetworkResponse.Error -> it.message?.let {

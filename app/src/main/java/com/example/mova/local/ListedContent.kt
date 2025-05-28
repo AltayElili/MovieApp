@@ -1,4 +1,4 @@
-package com.example.mova.data.model.local
+package com.example.mova.local
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

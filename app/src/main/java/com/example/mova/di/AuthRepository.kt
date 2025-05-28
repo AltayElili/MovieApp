@@ -1,7 +1,6 @@
-package com.example.mova.data.repository
+package com.example.mova.di
 
 import com.example.mova.api.NetworkResponse
-import com.example.mova.domain.repository.AuthRepository
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -11,12 +10,12 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
-class AuthRepositoryImpl @Inject constructor(
+class AuthRepository @Inject constructor(
     private val auth: FirebaseAuth,
     private val fireStore: FirebaseFirestore
-) : AuthRepository {
+) {
 
-    override fun login(email: String, password: String): Flow<NetworkResponse<AuthResult>> =
+    suspend fun login(email: String, password: String): Flow<NetworkResponse<AuthResult>> =
         flow {
             emit(NetworkResponse.Loading())
             val userLogin = auth.signInWithEmailAndPassword(email, password).await()
@@ -25,7 +24,8 @@ class AuthRepositoryImpl @Inject constructor(
             emit(NetworkResponse.Error(it.message.toString()))
         }
 
-    override fun register(email: String, password: String): Flow<NetworkResponse<AuthResult>> =
+
+    suspend fun register(email: String, password: String): Flow<NetworkResponse<AuthResult>> =
         flow {
             emit(NetworkResponse.Loading())
             val userRegister = auth.createUserWithEmailAndPassword(email, password).await()

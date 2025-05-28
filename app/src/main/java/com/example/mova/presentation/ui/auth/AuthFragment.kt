@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.example.mova.databinding.FragmentAuthBinding
-import com.example.mova.db.BaseFragment
+import com.example.mova.base.BaseFragment
 
 class AuthFragment : BaseFragment<FragmentAuthBinding>(FragmentAuthBinding::inflate) {
 

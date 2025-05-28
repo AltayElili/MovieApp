@@ -3,11 +3,10 @@ package com.example.mova.di
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
-import com.example.mova.api.MovieService
+import com.example.mova.api.MovaService
 import com.example.mova.api.TokenInterceptor
-import com.example.mova.data.local.MovieDataBase
 import com.example.mova.local.MovieDAO
-
+import com.example.mova.local.MovieDataBase
 import com.example.mova.utils.Constants.API_TOKEN
 import com.example.mova.utils.Constants.BASE_URL
 import com.google.firebase.auth.FirebaseAuth
@@ -53,10 +52,10 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideService(okHttpClient: OkHttpClient): MovieService {
+    fun provideService(okHttpClient: OkHttpClient): MovaService {
         return Retrofit.Builder().baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create()).client(okHttpClient).build()
-            .create(MovieService::class.java)
+            .create(MovaService::class.java)
     }
 
     @Provides

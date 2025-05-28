@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
-import com.example.mova.db.BaseFragment
+import com.example.mova.base.BaseFragment
 import com.example.mova.databinding.CustomLogoutDialogBinding
 import com.example.mova.databinding.FragmentProfileBinding
 import com.example.mova.utils.loadImage

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mova.api.NetworkResponse
-import com.example.mova.data.repository.AuthRepositoryImpl
+import com.example.mova.di.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
-    private val repository: AuthRepositoryImpl,
+    private val repository: AuthRepository,
     private val sharedPreferences: SharedPreferences
 ) : ViewModel() {
 

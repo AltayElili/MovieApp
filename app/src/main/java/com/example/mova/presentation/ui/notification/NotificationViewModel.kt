@@ -3,7 +3,7 @@ package com.example.mova.presentation.ui.notification
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mova.data.repository.MovieRepositoryImpl
+import com.example.mova.di.MovieRepository
 import com.example.mova.model.Notification
 import com.google.firebase.firestore.FirebaseFirestoreException
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class NotificationViewModel @Inject constructor(private val repository: MovieRepositoryImpl) :
+class NotificationViewModel @Inject constructor(private val repository: MovieRepository) :
     ViewModel() {
 
 

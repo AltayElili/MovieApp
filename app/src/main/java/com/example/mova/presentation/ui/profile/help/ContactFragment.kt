@@ -3,7 +3,7 @@ package com.example.mova.presentation.ui.profile.help
 import android.os.Bundle
 import android.view.View
 import com.example.mova.R
-import com.example.mova.db.BaseFragment
+import com.example.mova.base.BaseFragment
 import com.example.mova.databinding.FragmentContactBinding
 
 class ContactFragment : BaseFragment<FragmentContactBinding>(FragmentContactBinding::inflate) {

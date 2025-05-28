@@ -1,4 +1,4 @@
-package com.example.mova.db
+package com.example.mova.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
