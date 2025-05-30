@@ -19,7 +19,6 @@ import com.example.movie.utils.visible
 import com.google.android.material.tabs.TabLayout
 import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.collections.sortedWith
 
 @AndroidEntryPoint
 class ExploreFragment : BaseFragment<FragmentExploreBinding>(FragmentExploreBinding::inflate) {
@@ -57,13 +56,8 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>(FragmentExploreBind
                 currentTab = tab?.position ?: 0
                 viewModel.setSelectedTabIndex(currentTab)
                 if (searchResult) showContentState()
-                if (currentTab == 0) {
-                    binding.editTextSearch.setText(savedMovieQuery)
-                } else {
-                    binding.editTextSearch.setText(savedTvQuery)
-                }
+                binding.editTextSearch.setText(if (currentTab == 0) savedMovieQuery else savedTvQuery)
             }
-
             override fun onTabUnselected(p0: TabLayout.Tab?) {}
             override fun onTabReselected(p0: TabLayout.Tab?) {}
         })
@@ -75,9 +69,7 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>(FragmentExploreBind
             when (it) {
                 is MovieUiState.Loading -> binding.animationView.visible()
                 is MovieUiState.Error -> showFancyToast(it.message, FancyToast.ERROR)
-                is MovieUiState.Success -> {
-                    sortAndSubmitMovies(it.movieList)
-                }
+                is MovieUiState.Success -> sortAndSubmitMovies(it.movieList)
                 else -> Unit
             }
         }
@@ -87,9 +79,7 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>(FragmentExploreBind
             when (it) {
                 is ExploreViewModel.TvSeriesUiState.Loading -> binding.animationView.visible()
                 is ExploreViewModel.TvSeriesUiState.Error -> showFancyToast(it.message, FancyToast.ERROR)
-                is ExploreViewModel.TvSeriesUiState.Success -> {
-                    sortAndSubmitTv(it.tvList)
-                }
+                is ExploreViewModel.TvSeriesUiState.Success -> sortAndSubmitTv(it.tvList)
                 else -> Unit
             }
         }
@@ -99,9 +89,7 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>(FragmentExploreBind
             when (it) {
                 is MovieUiState.Loading -> binding.animationView.visible()
                 is MovieUiState.Error -> showFancyToast(it.message, FancyToast.ERROR)
-                is MovieUiState.Success -> {
-                    sortAndSubmitMovies(it.movieList)
-                }
+                is MovieUiState.Success -> sortAndSubmitMovies(it.movieList)
                 else -> Unit
             }
         }
@@ -111,9 +99,7 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>(FragmentExploreBind
             when (it) {
                 is ExploreViewModel.TvSeriesUiState.Loading -> binding.animationView.visible()
                 is ExploreViewModel.TvSeriesUiState.Error -> showFancyToast(it.message, FancyToast.ERROR)
-                is ExploreViewModel.TvSeriesUiState.Success -> {
-                    sortAndSubmitTv(it.tvList)
-                }
+                is ExploreViewModel.TvSeriesUiState.Success -> sortAndSubmitTv(it.tvList)
                 else -> Unit
             }
         }
@@ -128,16 +114,10 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>(FragmentExploreBind
     private fun setupClicks() {
         binding.editTextSearch.addTextChangedListener {
             val query = it.toString().trim()
-            if (query.isNotEmpty()) {
-                handleSearch(query)
-            } else {
-                handleEmptySearch()
-            }
+            if (query.isNotEmpty()) handleSearch(query) else handleEmptySearch()
         }
 
-        binding.buttonFilter.setOnClickListener {
-            showFilterPopup(it)
-        }
+        binding.buttonFilter.setOnClickListener { showFilterPopup(it) }
 
         movieSearchAdapter.onClick = { id, _ ->
             findNavController().navigate(
@@ -153,34 +133,26 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>(FragmentExploreBind
     }
 
     private fun handleSearch(query: String) {
-        when (currentTab) {
-            0 -> {
-                binding.rvExplore.adapter = movieSearchAdapter
-                viewModel.searchMovies(query)
-                viewModel.saveMovieQuery(query)
-            }
-
-            1 -> {
-                binding.rvExplore.adapter = tvSearchAdapter
-                viewModel.searchTvSeries(query)
-                viewModel.saveTvQuery(query)
-            }
+        if (currentTab == 0) {
+            binding.rvExplore.adapter = movieSearchAdapter
+            viewModel.searchMovies(query)
+            viewModel.saveMovieQuery(query)
+        } else {
+            binding.rvExplore.adapter = tvSearchAdapter
+            viewModel.searchTvSeries(query)
+            viewModel.saveTvQuery(query)
         }
     }
 
     private fun handleEmptySearch() {
-        when (currentTab) {
-            0 -> {
-                binding.rvExplore.adapter = movieSearchAdapter
-                viewModel.getTopRatedMovies()
-                viewModel.saveMovieQuery("")
-            }
-
-            1 -> {
-                binding.rvExplore.adapter = tvSearchAdapter
-                viewModel.getTopRatedTvSeries()
-                viewModel.saveTvQuery("")
-            }
+        if (currentTab == 0) {
+            binding.rvExplore.adapter = movieSearchAdapter
+            viewModel.getTopRatedMovies()
+            viewModel.saveMovieQuery("")
+        } else {
+            binding.rvExplore.adapter = tvSearchAdapter
+            viewModel.getTopRatedTvSeries()
+            viewModel.saveTvQuery("")
         }
     }
 
@@ -194,13 +166,11 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>(FragmentExploreBind
                     reSortList()
                     true
                 }
-
                 R.id.sort_za -> {
                     isAlphabetAsc = false
                     reSortList()
                     true
                 }
-
                 else -> false
             }
         }
@@ -211,54 +181,59 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>(FragmentExploreBind
         when (currentTab) {
             0 -> {
                 val currentList = viewModel.lastMovieList.value
-                if (currentList.isNullOrEmpty()) {
-                    viewModel.getTopRatedMovies()
-                } else {
-                    sortAndSubmitMovies(currentList)
-                }
+                if (currentList.isNullOrEmpty()) viewModel.getTopRatedMovies()
+                else sortAndSubmitMovies(currentList)
             }
             1 -> {
                 val currentList = viewModel.lastTvSeriesList.value
-                if (currentList.isNullOrEmpty()) {
-                    viewModel.getTopRatedTvSeries()
-                } else {
-                    sortAndSubmitTv(currentList)
-                }
+                if (currentList.isNullOrEmpty()) viewModel.getTopRatedTvSeries()
+                else sortAndSubmitTv(currentList)
             }
         }
     }
 
-    private fun sortAndSubmitMovies(list: List<com.example.movie.data.model.remote.Movie>) {
+    private fun sortAndSubmitMovies(list: List<Movie>) {
         val sorted = if (isAlphabetAsc) {
-            list.sortedWith(compareBy(nullsLast()) { it.title?.trim()?.lowercase() })
+            list.sortedBy { it.title?.trim()?.lowercase() }
         } else {
-            list.sortedWith(compareBy(nullsLast()) { it.title?.trim()?.lowercase() }).reversed()
+            list.sortedByDescending { it.title?.trim()?.lowercase() }
         }
+        handleSuccess(sorted, movieSearchAdapter) {
+            binding.rvExplore.scrollToPosition(0)
+        }
+    }
 
-        handleSuccess(sorted, movieSearchAdapter)
+    private fun sortAndSubmitTv(list: List<TvSeries>) {
+        val sorted = if (isAlphabetAsc) {
+            list.sortedBy { it.name?.trim()?.lowercase() }
+        } else {
+            list.sortedByDescending { it.name?.trim()?.lowercase() }
+        }
+        handleSuccess(sorted, tvSearchAdapter) {
+            binding.rvExplore.scrollToPosition(0)
+        }
     }
 
 
-    private fun sortAndSubmitTv(list: List<com.example.movie.data.model.remote.TvSeries>) {
-        val sorted = if (isAlphabetAsc) {
-            list.sortedWith(compareBy(nullsLast()) { it.name?.trim()?.lowercase() })
-        } else {
-            list.sortedWith(compareBy(nullsLast()) { it.name?.trim()?.lowercase() }).reversed()
-        }
-
-        handleSuccess(sorted, tvSearchAdapter)
-    }
-
-    private fun <T> handleSuccess(list: List<T>, adapter: ListAdapter<T, *>) {
+    private fun <T> handleSuccess(
+        list: List<T>,
+        adapter: ListAdapter<T, *>,
+        onSubmitted: () -> Unit
+    ) {
         searchResult = if (list.isEmpty()) {
             showEmptyState()
             true
         } else {
             showContentState()
-            adapter.submitList(list)
+            adapter.submitList(list) {
+                binding.rvExplore.post {
+                    onSubmitted()
+                }
+            }
             false
         }
     }
+
 
     private fun showEmptyState() {
         binding.errorMessage.visible()
