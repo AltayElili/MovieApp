@@ -1,5 +1,6 @@
 package com.example.movie.presentation
 
+import android.content.Context
 import android.os.Bundle
 import com.example.movie.R
 import androidx.activity.enableEdgeToEdge
@@ -9,11 +10,17 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.movie.databinding.ActivityMainBinding
 import com.example.movie.utils.gone
 import com.example.movie.utils.visible
+import com.example.movie.utils.LocaleHelper
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
+
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(newBase?.let { LocaleHelper.setLocale(it, LocaleHelper.getSavedLanguage(it)) })
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -37,6 +44,5 @@ class MainActivity : AppCompatActivity() {
                 else -> bottomMenu.gone()
             }
         }
-
     }
 }

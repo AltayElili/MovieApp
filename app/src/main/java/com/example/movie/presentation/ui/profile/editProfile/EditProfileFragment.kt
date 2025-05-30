@@ -16,6 +16,7 @@ import com.example.movie.databinding.FragmentEditProfileBinding
 import com.example.movie.model.Account
 import com.example.movie.presentation.ui.profile.myProfile.ProfileViewModel
 import com.example.movie.utils.loadImage
+import com.example.movie.utils.LocaleHelper
 import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,6 +39,7 @@ class EditProfileFragment :
         profileViewModel.getDataFromFireStore()
         setUpClicks()
         selectProfileImage()
+        setupLanguageSpinner()
     }
 
     private fun observeData() {
@@ -89,9 +91,7 @@ class EditProfileFragment :
                 items[position]
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
-
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
         setSpinnerPosition(adapter, spinner, selectedItem)
@@ -119,7 +119,6 @@ class EditProfileFragment :
         }
     }
 
-
     private fun setUpClicks() {
         binding.imageViewArrowEditToHome.setOnClickListener {
             findNavController().popBackStack()
@@ -130,6 +129,7 @@ class EditProfileFragment :
             val nickName = binding.EditTextEditNickname.text.toString().trim()
             val country = binding.spinnerCountry.selectedItem.toString()
             val gender = binding.spinnerGender.selectedItem.toString()
+            val language = binding.spinnerLanguage.selectedItem.toString()
 
             if (fullName.isEmpty() || nickName.isEmpty()) {
                 showFancyToast("Please fill all required fields.", FancyToast.WARNING)
@@ -142,6 +142,34 @@ class EditProfileFragment :
                 editProfileViewModel.updateFireStore(updatedAccount)
                 showFancyToast("Updated successfully!", FancyToast.SUCCESS)
             }
+        }
+    }
+
+    private fun setupLanguageSpinner() {
+        val languages = listOf("English", "Azərbaycan")
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, languages)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerLanguage.adapter = adapter
+
+        val currentLang = LocaleHelper.getSavedLanguage(requireContext())
+        val selectedIndex = if (currentLang == "az") 1 else 0
+        binding.spinnerLanguage.setSelection(selectedIndex)
+
+        binding.spinnerLanguage.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                val selectedLang = when (position) {
+                    0 -> "en"
+                    1 -> "az"
+                    else -> "en"
+                }
+                if (selectedLang != LocaleHelper.getSavedLanguage(requireContext())) {
+                    LocaleHelper.saveLanguage(requireContext(), selectedLang)
+                    val context = LocaleHelper.setLocale(requireContext(), selectedLang)
+                    requireActivity().recreate()
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
     }
 }

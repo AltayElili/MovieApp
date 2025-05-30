@@ -136,6 +136,19 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
                 binding.buttonAddToList.isChecked = isButtonChecked
             }
         }
+        binding.imageView9.setOnClickListener {
+            val shareText = if (args.isMovie) {
+                "Check out this movie: ${binding.movie?.originalTitle}\n\nhttps://www.themoviedb.org/movie/${args.id}"
+            } else {
+                "Check out this TV series: ${binding.tvSeries?.originalName}\n\nhttps://www.themoviedb.org/tv/${args.id}"
+            }
+
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "text/plain"
+            intent.putExtra(Intent.EXTRA_TEXT, shareText)
+            startActivity(Intent.createChooser(intent, "Share via"))
+        }
+
         binding.buttonDetailPlay.setOnClickListener {
             val youtubeUrl = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl))

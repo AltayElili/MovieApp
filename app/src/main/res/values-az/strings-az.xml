@@ -1,0 +1,114 @@
+<resources>
+    <string name="app_name">Mova</string>
+    <string name="welcome_description">Gününüzü gözəlləşdirəcək əsrin ən yaxşı film izləmə tətbiqi!</string>
+    <string name="welcome_to_mova">Mova-ya xoş gəlmisiniz</string>
+    <string name="get_started">Başla</string>
+
+    <string name="lets_you_in">Daxil olun</string>
+    <string name="continue_with_facebook">Facebook ilə davam et</string>
+    <string name="continue_with_google">Google ilə davam et</string>
+    <string name="continue_with_apple">Apple ilə davam et</string>
+    <string name="or">və ya</string>
+    <string name="sign_in_with_password">Şifrə ilə daxil ol</string>
+    <string name="dont_have_account">Hesabınız yoxdur?</string>
+    <string name="sign_up">Qeydiyyatdan keç</string>
+
+    <string name="login_title">Hesabınıza daxil olun</string>
+    <string name="email_hint">E-poçt</string>
+    <string name="password_hint">Şifrə</string>
+    <string name="remember_me">Yadda saxla</string>
+    <string name="sign_in">Daxil ol</string>
+    <string name="forgot_password">Şifrəni unutmusunuz?</string>
+    <string name="or_continue_with">və ya davam et</string>
+    <string name="already_have_account">Artıq hesabınız var?</string>
+
+    <string name="fill_profile_title">Profil məlumatlarınızı doldurun</string>
+    <string name="select_image">Şəkil seç</string>
+    <string name="hint_full_name">Ad Soyad</string>
+    <string name="hint_nickname">Ləqəb</string>
+    <string name="skip_button">Keç</string>
+    <string name="continue_button">Davam et</string>
+
+    <string name="top_10_movies">Bu həftənin ən yaxşı 10 filmi</string>
+    <string name="see_all">Hamısına bax</string>
+    <string name="new_releases">Yeni çıxışlar</string>
+
+    <string name="play_button">İzlə</string>
+    <string name="download_button">Yüklə</string>
+    <string name="more_like_this">Bənzər filmlər</string>
+    <string name="comments">Rəylər</string>
+    <string name="no_actors_available">Hal-hazırda aktyor məlumatı yoxdur.</string>
+    <string name="notification">Bildiriş</string>
+    <string name="search">Axtarış</string>
+    <string name="movies">Filmlər</string>
+    <string name="tv_series">Seriallar</string>
+    <string name="my_list">Siyahım</string>
+    <string name="list_is_empty">Siyahınız boşdur</string>
+
+    <string name="profile">Profil</string>
+    <string name="edit_profile">Profili redaktə et</string>
+    <string name="notifications">Bildirişlər</string>
+    <string name="dark_mode">Qaranlıq rejim</string>
+    <string name="help_center">Yardım mərkəzi</string>
+    <string name="privacy_policy">Məxfilik siyasəti</string>
+    <string name="what_is_mova">Mova istifadəçilərə həm filmləri, həm də serialları ətraflı araşdırmağa, sevdiklərini siyahıya əlavə etməyə imkan verən bir platformadır.</string>
+    <string name="how_to_delete_content">Filmi və ya serialı siyahıdan silmək üçün onun üzərinə klikləyin və təsdiq pəncərəsində “Bəli” düyməsinə basın.</string>
+    <string name="how_to_add_content">Siyahıya əlavə etmək üçün detal səhifəsindəki “siyahı” ikonuna klikləyin.</string>
+    <string name="how_to_change_user_info">Profil bölməsində “Profili redaktə et” düyməsini klikləyin.</string>
+    <string name="lorem">Sadəcə nümunə mətnidir, dəyişdirilə bilər.</string>
+    <string name="privacy_lorem">Bu, məxfilik siyasəti üçün nümunə mətnidir. Buraya real məlumatlar daxil edilməlidir.</string>
+
+    <string name="imdb_rating">IMDB Reytinqi</string>
+    <string name="release_date">Buraxılış tarixi</string>
+    <string name="genre">Janr</string>
+    <string name="overview">İcmal</string>
+    <string name="production_company">İstehsal şirkəti</string>
+    <string name="original_language">Orijinal dil</string>
+    <string name="cast">Heyət</string>
+    <string name="add_to_list">Siyahıya əlavə et</string>
+    <string name="remove_from_list">Siyahıdan sil</string>
+
+    <string name="hello_blank_fragment">Salam, boş fragment</string>
+    <string name="error_description">Daxil etdiyiniz açar söz tapılmadı. Yenidən yoxlayın və ya başqa sözlə axtarın.</string>
+    <string name="movie_not_found">Hazırda uyğun film təklifi yoxdur</string>
+    <string name="no_reviews">Hələ rəy yoxdur. Sonra yenidən baxın!</string>
+    <string name="list_error_message">Görünür, siyahınıza heç bir film əlavə etməmisiniz</string>
+    <string name="delete_from_list">Bu məzmunu silmək istədiyinizə əminsiniz?</string>
+    <string name="not_in_list">Axtardığınız məzmun siyahınızda yoxdur.</string>
+    <string name="choose_country">Ölkəni seçin</string>
+    <string name="update">Yenilə</string>
+    <string name="general_notification">Ümumi Bildiriş</string>
+    <string name="new_arrival">Yeni gələnlər</string>
+    <string name="app_updates">Tətbiq yeniləmələri</string>
+    <string name="subscription">Abunəlik</string>
+    <string name="faq">Tez-tez soruşulan suallar</string>
+    <string name="contact_us">Bizimlə əlaqə</string>
+    <string name="types_of_data_we_collect">1. Topladığımız Məlumat Növləri</string>
+    <string name="use_of_your_personal_data">2. Şəxsi Məlumatlarınızın İstifadəsi</string>
+    <string name="disclosure_of_your_personal_data">3. Şəxsi Məlumatların Açıqlanması</string>
+    <string name="home">Əsas</string>
+    <string name="explore">Kəşf et</string>
+
+    <string-array name="countries_array">
+        <item>Amerika Birləşmiş Ştatları</item>
+        <item>Kanada</item>
+        <item>Birləşmiş Krallıq</item>
+        <item>Almaniya</item>
+        <item>Fransa</item>
+        <item>Avstraliya</item>
+        <item>İtaliya</item>
+        <item>İspaniya</item>
+        <item>Yaponiya</item>
+        <item>Braziliya</item>
+    </string-array>
+
+    <string-array name="language_array">
+        <item>English</item>
+        <item>Azərbaycan</item>
+    </string-array>
+
+    <string-array name="gender_array">
+        <item>Kişi</item>
+        <item>Qadın</item>
+    </string-array>
+</resources>
