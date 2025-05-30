@@ -8,11 +8,11 @@ import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import com.example.movie.base.BaseFragment
+import com.example.movie.db.BaseFragment
 import com.example.movie.databinding.CustomDeleteDialogBinding
 import com.example.movie.databinding.FragmentListBinding
-import com.example.movie.local.ListedContent
-import com.example.movie.local.Movie
+import com.example.movie.data.model.local.ListedContent
+import com.example.movie.data.model.local.Movie
 import com.example.movie.presentation.ui.detail.DetailViewModel
 import com.example.movie.utils.gone
 import com.example.movie.utils.visible

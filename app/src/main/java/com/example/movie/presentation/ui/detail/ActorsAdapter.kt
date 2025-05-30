@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil.ItemCallback
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movie.databinding.ActorItemBinding
-import com.example.movie.model.Cast
+import com.example.movie.data.model.remote.Cast
 
 class ActorsAdapter : ListAdapter<Cast, ActorsAdapter.ActorViewHolder>(ActorDiffCallback()) {
 

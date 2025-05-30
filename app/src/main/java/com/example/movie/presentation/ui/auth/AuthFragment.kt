@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.example.movie.databinding.FragmentAuthBinding
-import com.example.movie.base.BaseFragment
+import com.example.movie.db.BaseFragment
 
 class AuthFragment : BaseFragment<FragmentAuthBinding>(FragmentAuthBinding::inflate) {
 

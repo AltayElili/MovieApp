@@ -3,7 +3,7 @@ package com.example.movie.presentation.ui.detail
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import com.example.movie.base.BaseFragment
+import com.example.movie.db.BaseFragment
 import com.example.movie.databinding.FragmentRelatedBinding
 import com.example.movie.presentation.ui.home.MovieAdapter
 import com.example.movie.presentation.ui.home.MovieUiState

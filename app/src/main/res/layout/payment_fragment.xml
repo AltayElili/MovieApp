@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/paymentLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp">
+
+    <ImageView
+        android:id="@+id/netflixLogo"
+        android:layout_width="211dp"
+        android:layout_height="126dp"
+        android:layout_marginBottom="24dp"
+        android:contentDescription="Netflix Logo"
+        android:scaleType="fitCenter"
+        android:src="@drawable/netflixlogo" />
+
+    <TextView
+        android:id="@+id/paymentTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Complete Your Payment"
+        android:textColor="#FFFFFF"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp" />
+
+    <EditText
+        android:id="@+id/cardNumberEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Card Number (16 digits)"
+        android:inputType="number"
+        android:maxLength="16"
+        android:background="@drawable/edit_text_bg"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#888888"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/expiryDateEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="MM/YY"
+        android:inputType="text"
+        android:maxLength="5"
+        android:background="@drawable/edit_text_bg"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#888888"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/cvvEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="CVV"
+        android:inputType="numberPassword"
+        android:maxLength="3"
+        android:background="@drawable/edit_text_bg"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#888888"
+        android:padding="12dp"
+        android:layout_marginBottom="24dp" />
+
+    <Button
+        android:id="@+id/payButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pay"
+        android:backgroundTint="#E50914"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:padding="12dp"
+        android:textStyle="bold" />
+
+</LinearLayout>

@@ -1,6 +1,6 @@
 package com.example.movie.presentation.ui.home
 
-import com.example.movie.model.Movie
+import com.example.movie.data.model.remote.Movie
 
 sealed class MovieUiState {
 

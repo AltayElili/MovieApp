@@ -3,8 +3,8 @@ package com.example.movie.presentation.ui.notification
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movie.di.MovieRepository
-import com.example.movie.model.Notification
+import com.example.movie.data.model.remote.Notification
+import com.example.movie.domain.repository.MovieRepository
 import com.google.firebase.firestore.FirebaseFirestoreException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

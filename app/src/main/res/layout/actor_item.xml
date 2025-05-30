@@ -6,7 +6,7 @@
 
         <variable
             name="actor"
-            type="com.example.movie.model.Cast" />
+            type="com.example.movie.data.model.remote.Cast" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

@@ -1,10 +1,10 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Base.Theme.Mova" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.Movie" parent="Theme.Material3.DayNight.NoActionBar">
 
     </style>
 
-    <style name="Theme.Mova" parent="Base.Theme.Mova" />
+    <style name="Theme.Movie" parent="Base.Theme.Movie" />
 
     <style name="list_error_image_style">
         <item name="android:src">@drawable/list_error_light</item>

@@ -5,10 +5,11 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.movie.R
-import com.example.movie.base.BaseFragment
+import com.example.movie.db.BaseFragment
 import com.example.movie.databinding.FragmentViewAllBinding
-import com.example.movie.model.Movie
+import com.example.movie.data.model.remote.Movie
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.collections.toList
 
 @AndroidEntryPoint
 class ViewAllFragment : BaseFragment<FragmentViewAllBinding>(FragmentViewAllBinding::inflate) {

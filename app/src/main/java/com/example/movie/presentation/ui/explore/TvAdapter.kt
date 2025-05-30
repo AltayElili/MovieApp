@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil.ItemCallback
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movie.databinding.TvItemBinding
-import com.example.movie.model.TvSeries
+import com.example.movie.data.model.remote.TvSeries
 
 class TvAdapter : ListAdapter<TvSeries, TvAdapter.TvViewHolder>(TvDiffCallback()) {
 

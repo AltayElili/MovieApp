@@ -7,11 +7,11 @@
 
         <variable
             name="movie"
-            type="com.example.movie.model.DetailResponse" />
+            type="com.example.movie.data.model.remote.DetailResponse" />
 
         <variable
             name="tvSeries"
-            type="com.example.movie.model.TvDetailsResponse" />
+            type="com.example.movie.data.model.remote.TvDetailsResponse" />
     </data>
 
     <ScrollView

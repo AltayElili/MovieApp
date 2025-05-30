@@ -3,7 +3,7 @@ package com.example.movie.presentation.ui.profile.help
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
-import com.example.movie.base.BaseFragment
+import com.example.movie.db.BaseFragment
 import com.example.movie.databinding.FragmentHelpBinding
 import com.google.android.material.tabs.TabLayoutMediator
 

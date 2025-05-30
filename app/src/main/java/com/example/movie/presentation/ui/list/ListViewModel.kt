@@ -3,8 +3,8 @@ package com.example.movie.presentation.ui.list
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movie.local.LocalRepository
-import com.example.movie.local.Movie
+import com.example.movie.data.model.local.Movie
+import com.example.movie.domain.repository.LocalRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest

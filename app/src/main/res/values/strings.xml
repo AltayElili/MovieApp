@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">Mova</string>
+    <string name="app_name">Movie</string>
     <string name="welcome_description">The best movie streaming app of the century to make your days great!</string>
     <string name="welcome_to_mova">"Welcome to Movie"</string>
     <string name="get_started">"Get Started"</string>
+    <string name="create_account">Create Your Account</string>
 
     <string name="lets_you_in">Let’s you in</string>
     <string name="continue_with_facebook">Continue with Facebook</string>

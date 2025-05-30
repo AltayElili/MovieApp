@@ -6,7 +6,7 @@
 
         <variable
             name="review"
-            type="com.example.movie.model.Review" />
+            type="com.example.movie.data.model.remote.Review" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

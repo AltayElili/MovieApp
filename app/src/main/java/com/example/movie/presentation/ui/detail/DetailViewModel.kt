@@ -3,14 +3,14 @@ package com.example.movie.presentation.ui.detail
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movie.api.NetworkResponse
-import com.example.movie.di.MovieRepository
-import com.example.movie.local.ListedContent
-import com.example.movie.local.LocalRepository
-import com.example.movie.model.ActorResponse
-import com.example.movie.model.DetailResponse
-import com.example.movie.model.Review
-import com.example.movie.model.TvDetailsResponse
+import com.example.movie.data.api.NetworkResponse
+import com.example.movie.data.model.local.ListedContent
+import com.example.movie.data.model.remote.ActorResponse
+import com.example.movie.data.model.remote.DetailResponse
+import com.example.movie.data.model.remote.Review
+import com.example.movie.data.model.remote.TvDetailsResponse
+import com.example.movie.domain.repository.LocalRepository
+import com.example.movie.domain.repository.MovieRepository
 import com.example.movie.presentation.ui.home.MovieUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -47,7 +47,7 @@ class DetailViewModel @Inject constructor(
                     }
 
                     is NetworkResponse.Success -> movieDetailState.value = it.data?.let {
-                        MovieDetailUiState.DetailSuccess(it)
+                        MovieDetailUiState.DetailSuccess(it as DetailResponse)
                     }
                 }
 
@@ -67,7 +67,7 @@ class DetailViewModel @Inject constructor(
                     }
 
                     is NetworkResponse.Success -> it.data?.let {
-                        tvDetailState.value = TvDetailUiState.TvDetailSuccess(it)
+                        tvDetailState.value = TvDetailUiState.TvDetailSuccess(it as TvDetailsResponse)
                     }
                 }
 
@@ -85,7 +85,7 @@ class DetailViewModel @Inject constructor(
                     }
 
                     is NetworkResponse.Success -> movieActorState.value = it.data?.let {
-                        ActorUiState.ActorSuccess(it)
+                        ActorUiState.ActorSuccess(it as ActorResponse)
                     }
                 }
             }
@@ -102,7 +102,7 @@ class DetailViewModel @Inject constructor(
                     }
 
                     is NetworkResponse.Success -> tvActorState.value = it.data?.let {
-                        ActorUiState.ActorSuccess(it)
+                        ActorUiState.ActorSuccess(it as ActorResponse)
                     }
                 }
             }
@@ -131,19 +131,45 @@ class DetailViewModel @Inject constructor(
         viewModelScope.launch {
             repository.getRelatedTvSeries(id).collectLatest {
                 when (it) {
-                    is NetworkResponse.Loading -> relatedTvState.value = MovieUiState.Loading
-                    is NetworkResponse.Error -> it.message?.let {
-                        relatedTvState.value = MovieUiState.Error(it)
+                    is NetworkResponse.Loading -> {
+                        relatedTvState.value = MovieUiState.Loading
                     }
 
-                    is NetworkResponse.Success -> it.data?.movies?.let {
-                        relatedTvState.value = MovieUiState.Success(it)
+                    is NetworkResponse.Error -> {
+                        it.message?.let { message ->
+                            relatedTvState.value = MovieUiState.Error(message)
+                        }
+                    }
 
+                    is NetworkResponse.Success -> {
+                        val mappedList = it.data?.tvSeries?.map { tv ->
+                            com.example.movie.data.model.remote.Movie(
+                                id = tv.id,
+                                title = tv.name,
+                                posterPath = tv.posterPath,
+                                voteAverage = tv.voteAverage,
+                                adult = tv.adult,
+                                backdropPath = tv.backdropPath,
+                                genreIds = tv.genreIds,
+                                originalLanguage = tv.originalLanguage,
+                                originalTitle = tv.originalName,
+                                overview = tv.overview,
+                                popularity = tv.popularity,
+                                releaseDate = tv.firstAirDate,
+                                video = false,
+                                voteCount = tv.voteCount,
+                                isMovie = false
+                            )
+                        } ?: emptyList()
+
+                        relatedTvState.value = MovieUiState.Success(mappedList)
                     }
                 }
             }
         }
     }
+
+
 
     fun getMovieReviews(id: String) {
         viewModelScope.launch {

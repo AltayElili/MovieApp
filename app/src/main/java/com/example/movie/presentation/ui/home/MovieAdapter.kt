@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.example.movie.databinding.DefaultMovieItemBinding
 import com.example.movie.databinding.LargeMovieItemBinding
-import com.example.movie.model.Movie
+import com.example.movie.data.model.remote.Movie
 
 class MovieAdapter(private val isLargeItem: Boolean = false) :
     ListAdapter<Movie, MovieAdapter.MovieViewHolder>(MovieDiffCallback()) {

@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Mova"
+rootProject.name = "Movie"
 include(":app")

@@ -12,9 +12,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.movie.R
-import com.example.movie.base.BaseFragment
+import com.example.movie.db.BaseFragment
 import com.example.movie.databinding.FragmentFillProfileBinding
-import com.example.movie.model.Account
+import com.example.movie.data.model.remote.Account
 import com.google.firebase.Firebase
 import com.google.firebase.storage.storage
 import com.shashank.sony.fancytoastlib.FancyToast
@@ -135,7 +135,7 @@ class FillProfileFragment :
     }
 
     private fun navigateToHome() {
-        findNavController().navigate(FillProfileFragmentDirections.actionFillProfileFragmentToHomeFragment())
+        findNavController().navigate(FillProfileFragmentDirections.actionFillProfileFragmentToPaymentFragment())
     }
 
 

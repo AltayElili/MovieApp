@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.movie.base.BaseFragment
+import com.example.movie.db.BaseFragment
 import com.example.movie.databinding.FragmentHomeBinding
-import com.example.movie.model.Movie
+import com.example.movie.data.model.remote.Movie
 import com.example.movie.utils.gone
 import com.example.movie.utils.visible
 import com.shashank.sony.fancytoastlib.FancyToast

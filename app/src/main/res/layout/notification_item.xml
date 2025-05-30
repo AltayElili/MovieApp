@@ -7,7 +7,7 @@
 
         <variable
             name="notification"
-            type="com.example.movie.model.Notification" />
+            type="com.example.movie.data.model.remote.Notification" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

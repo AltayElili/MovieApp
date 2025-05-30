@@ -5,7 +5,13 @@ import android.content.SharedPreferences
 import androidx.room.Room
 import com.example.movie.api.MovieService
 import com.example.movie.api.TokenInterceptor
-import com.example.movie.local.MovieDAO
+import com.example.movie.data.local.MovieDAO
+import com.example.movie.data.repository.AuthRepositoryImpl
+import com.example.movie.data.repository.LocalRepositoryImpl
+import com.example.movie.data.repository.MovieRepositoryImpl
+import com.example.movie.domain.repository.AuthRepository
+import com.example.movie.domain.repository.LocalRepository
+import com.example.movie.domain.repository.MovieRepository
 import com.example.movie.local.MovieDataBase
 import com.example.movie.utils.Constants.API_TOKEN
 import com.example.movie.utils.Constants.BASE_URL
@@ -76,5 +82,26 @@ object AppModule {
         return movieDataBase.getDao()
     }
 
+    @Provides
+    @Singleton
+    fun provideLocalRepository(dao: MovieDAO): LocalRepository {
+        return LocalRepositoryImpl(dao)
+    }
 
+    @Provides
+    @Singleton
+    fun provideMovieRepository(
+        service: MovieService,
+        fireStore: FirebaseFirestore
+    ): MovieRepository {
+        return MovieRepositoryImpl(service, fireStore)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAuthRepository(
+        firebaseAuth: FirebaseAuth
+    ): AuthRepository {
+        return AuthRepositoryImpl(firebaseAuth)
+    }
 }

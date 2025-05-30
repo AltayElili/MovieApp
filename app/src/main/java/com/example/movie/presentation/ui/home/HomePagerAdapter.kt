@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil.ItemCallback
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movie.databinding.ImageItemBinding
-import com.example.movie.model.Movie
+import com.example.movie.data.model.remote.Movie
 
 class HomePagerAdapter :
     ListAdapter<Movie, HomePagerAdapter.ImageViewHolder>(ImageDiffCallback()) {

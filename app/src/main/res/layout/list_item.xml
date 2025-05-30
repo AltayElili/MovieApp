@@ -7,7 +7,7 @@
 
         <variable
             name="content"
-            type="com.example.movie.local.Movie" />
+            type="com.example.movie.data.model.local.Movie" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

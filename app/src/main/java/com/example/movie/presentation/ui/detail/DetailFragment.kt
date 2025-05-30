@@ -8,10 +8,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.movie.base.BaseFragment
+import com.example.movie.db.BaseFragment
 import com.example.movie.databinding.FragmentDetailBinding
-import com.example.movie.local.ListedContent
-import com.example.movie.local.Movie
+import com.example.movie.data.model.local.ListedContent
+import com.example.movie.data.model.local.Movie
 import com.example.movie.presentation.ui.list.ListViewModel
 import com.example.movie.utils.gone
 import com.example.movie.utils.visible

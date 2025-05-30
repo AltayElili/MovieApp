@@ -3,7 +3,7 @@ package com.example.movie.presentation.ui.profile.help
 import android.os.Bundle
 import android.view.View
 import com.example.movie.R
-import com.example.movie.base.BaseFragment
+import com.example.movie.db.BaseFragment
 import com.example.movie.databinding.FragmentContactBinding
 
 class ContactFragment : BaseFragment<FragmentContactBinding>(FragmentContactBinding::inflate) {
