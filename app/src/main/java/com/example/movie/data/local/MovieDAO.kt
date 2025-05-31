@@ -3,6 +3,7 @@ package com.example.movie.data.local
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.movie.data.model.local.ListedContent
 import com.example.movie.data.model.local.Movie
@@ -11,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface MovieDAO {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addContent(movie: Movie)
 
     @Query("SELECT * FROM movie_table")

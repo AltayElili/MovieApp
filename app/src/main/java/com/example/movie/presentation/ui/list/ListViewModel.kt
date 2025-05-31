@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,6 +25,23 @@ class ListViewModel @Inject constructor(private val localRepository: LocalReposi
         }
     }
 
+    private fun com.example.movie.data.model.remote.Movie.toLocal() = Movie(
+        poster    = posterPath.toString(),
+        rating    = voteAverage ?: 0.0,
+        title     = title ?: "",
+        contentId = id.toString()
+    )
+    fun toggleContent(remote: com.example.movie.data.model.remote.Movie, onResult: (Boolean) -> Unit) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val exists = localRepository.isContentInList(remote.id.toString()) > 0
+            if (exists) {
+                localRepository.deleteContent(remote.toLocal())
+            } else {
+                localRepository.addContent(remote.toLocal())
+            }
+            withContext(Dispatchers.Main) { onResult(!exists) }
+        }
+    }
     fun getAllContent() {
         viewModelScope.launch {
             localRepository.getAllContent().collectLatest {

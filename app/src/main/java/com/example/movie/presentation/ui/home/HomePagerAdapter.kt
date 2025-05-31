@@ -2,41 +2,41 @@ package com.example.movie.presentation.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil.ItemCallback
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.movie.databinding.ImageItemBinding
 import com.example.movie.data.model.remote.Movie
+import com.example.movie.databinding.ImageItemBinding
 
-class HomePagerAdapter :
-    ListAdapter<Movie, HomePagerAdapter.ImageViewHolder>(ImageDiffCallback()) {
+enum class HeroAction { PLAY, ADD, NOTIFICATION }
 
-    lateinit var onClick: () -> Unit
+class HomePagerAdapter(
+    private val onAction: (Movie, HeroAction) -> Unit
+) : ListAdapter<Movie, HomePagerAdapter.ImageVH>(ImageDiff()) {
 
-    inner class ImageViewHolder(val imageItemBinding: ImageItemBinding) :
-        RecyclerView.ViewHolder(imageItemBinding.root)
+    inner class ImageVH(val binding: ImageItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
-        val view = ImageItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ImageViewHolder(view)
-    }
+        fun bind(item: Movie) = with(binding) {
+            movie = item
+            executePendingBindings()
 
-    override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        val data = getItem(position)
-        holder.imageItemBinding.movie = data
-        holder.imageItemBinding.imageViewNotification.setOnClickListener {
-            onClick()
+            buttonPlay.setOnClickListener { onAction(item, HeroAction.PLAY) }
+            buttonMyList.setOnClickListener { onAction(item, HeroAction.ADD) }
+            imageViewNotification.setOnClickListener { onAction(item, HeroAction.NOTIFICATION) }
         }
     }
 
-    class ImageDiffCallback : ItemCallback<Movie>() {
-        override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
-            return oldItem.id == newItem.id
-        }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageVH {
+        val li = LayoutInflater.from(parent.context)
+        return ImageVH(ImageItemBinding.inflate(li, parent, false))
+    }
 
-        override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
-            return oldItem == newItem
-        }
+    override fun onBindViewHolder(holder: ImageVH, position: Int) =
+        holder.bind(getItem(position))
 
+    private class ImageDiff : DiffUtil.ItemCallback<Movie>() {
+        override fun areItemsTheSame(o: Movie, n: Movie) = o.id == n.id
+        override fun areContentsTheSame(o: Movie, n: Movie) = o == n
     }
 }

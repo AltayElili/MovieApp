@@ -1,12 +1,16 @@
 package com.example.movie.presentation.ui.home
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.movie.db.BaseFragment
 import com.example.movie.databinding.FragmentHomeBinding
 import com.example.movie.data.model.remote.Movie
+import com.example.movie.presentation.ui.list.ListViewModel
 import com.example.movie.utils.gone
 import com.example.movie.utils.visible
 import com.shashank.sony.fancytoastlib.FancyToast
@@ -16,9 +20,29 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
     private val viewModel by viewModels<HomeViewModel>()
+    private val listViewModel by activityViewModels<ListViewModel>()
     private val topRatedAdapter = MovieAdapter()
     private val upcomingAdapter = MovieAdapter()
-    private val viewPagerAdapter = HomePagerAdapter()
+    private val viewPagerAdapter = HomePagerAdapter { movie, action ->
+        when (action) {
+            HeroAction.PLAY -> {
+                val url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+            }
+            HeroAction.ADD -> {
+                listViewModel.toggleContent(movie) { added ->
+                    val msg = if (added) "Added to My List" else "Removed from My List"
+                    showFancyToast(msg, FancyToast.INFO)
+                }
+            }
+            HeroAction.NOTIFICATION -> {
+                findNavController().navigate(
+                    HomeFragmentDirections.actionHomeFragmentToNotificationFragment()
+                )
+            }
+        }
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,6 +50,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         observeData()
         getMovies()
         setupClicks()
+
     }
 
 
@@ -49,6 +74,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 else -> Unit
             }
         }
+
         viewModel.upcomingState.observe(viewLifecycleOwner) {
             binding.progressBarNew.gone()
             when (it) {
@@ -102,21 +128,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     private fun setupClicks() {
-        viewPagerAdapter.onClick = {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToNotificationFragment())
-        }
         topRatedAdapter.onClick = { id, _ ->
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToDetailFragment(
-                    true, id
-                )
+                HomeFragmentDirections.actionHomeFragmentToDetailFragment(true, id)
             )
         }
         upcomingAdapter.onClick = { id, _ ->
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToDetailFragment(
-                    true, id
-                )
+                HomeFragmentDirections.actionHomeFragmentToDetailFragment(true, id)
             )
         }
     }

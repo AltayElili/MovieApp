@@ -1,9 +1,15 @@
 package com.example.movie.presentation.ui.detail
 
+import android.Manifest
+import com.example.movie.R
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -13,11 +19,18 @@ import com.example.movie.databinding.FragmentDetailBinding
 import com.example.movie.data.model.local.ListedContent
 import com.example.movie.data.model.local.Movie
 import com.example.movie.presentation.ui.list.ListViewModel
+import com.example.movie.utils.DownloadHelper
 import com.example.movie.utils.gone
 import com.example.movie.utils.visible
 import com.google.android.material.tabs.TabLayoutMediator
 import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
+import android.graphics.RenderEffect
+import android.graphics.Shader
+import android.view.WindowManager
+import android.widget.ImageView
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 @AndroidEntryPoint
 class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding::inflate) {
@@ -28,6 +41,9 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
     private val actorsAdapter = ActorsAdapter()
     private var isButtonChecked: Boolean = false
     private val detailPagerAdapter by lazy { DetailPagerAdapter(this, args.id, args.isMovie) }
+    private val SAMPLE_VIDEO =
+        "https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4"
+    private val PERM_REQ_CODE = 601
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,7 +53,47 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
         getData()
         setupClicks()
         detailViewModel.isContentInList(args.id)
+        binding.buttonDetailDownload.setOnClickListener {
+            checkPermissionAndDownload()
+        }
+        binding.buttonDetailDownload.setOnClickListener { checkPermissionAndDownload() }
+        binding.imageView17.setOnClickListener { showCastBottomSheet() }
     }
+
+    private fun showCastBottomSheet() {
+        val dialog = BottomSheetDialog(requireContext(), com.google.android.material.R.style.Animation_Material3_BottomSheetDialog)
+        val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_cast, null)
+        dialog.setContentView(sheetView)
+        sheetView.post {
+            (sheetView.parent as? View)?.let { sheet ->
+                BottomSheetBehavior.from(sheet).apply {
+                    peekHeight = (resources.displayMetrics.heightPixels * 0.55).toInt()
+                    isFitToContents = false
+                    state = BottomSheetBehavior.STATE_COLLAPSED
+                }
+                sheet.setBackgroundResource(R.drawable.check_off)
+            }
+        }
+        dialog.window?.apply {
+            clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+            setDimAmount(0f)
+        }
+        blurBackground(true)
+
+        sheetView.findViewById<ImageView>(R.id.imageClose)?.setOnClickListener { dialog.dismiss() }
+
+        dialog.setOnDismissListener { blurBackground(false) }
+        dialog.show()
+    }
+
+private fun blurBackground(enable: Boolean) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        binding.root.setRenderEffect(
+            if (enable) RenderEffect.createBlurEffect(25f, 25f, Shader.TileMode.CLAMP) else null
+        )
+    }
+    binding.viewBlurOverlay.visibility = if (enable) View.VISIBLE else View.GONE
+}
 
     private fun tabMediator() {
         TabLayoutMediator(binding.tabLayout, binding.tabsViewPager) { tab, position ->
@@ -48,6 +104,40 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
         }.attach()
     }
 
+
+    private fun checkPermissionAndDownload() {
+        val permission = when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU ->
+                Manifest.permission.READ_MEDIA_VIDEO
+
+            else -> Manifest.permission.READ_EXTERNAL_STORAGE
+        }
+
+        val granted = ContextCompat.checkSelfPermission(
+            requireContext(), permission
+        ) == PackageManager.PERMISSION_GRANTED
+
+        if (granted) {
+            DownloadHelper.startDownload(requireContext(), SAMPLE_VIDEO)
+        } else {
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(permission), PERM_REQ_CODE)
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == PERM_REQ_CODE && grantResults.isNotEmpty()
+            && grantResults[0] == PackageManager.PERMISSION_GRANTED
+        ) {
+            DownloadHelper.startDownload(requireContext(), SAMPLE_VIDEO)
+        } else if (requestCode == PERM_REQ_CODE) {
+            showFancyToast("Permission denied – cannot download.", FancyToast.WARNING)
+        }
+    }
 
     private fun observeData() {
         detailViewModel.movieDetailState.observe(viewLifecycleOwner) {
@@ -237,5 +327,4 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
 
         }
     }
-
 }

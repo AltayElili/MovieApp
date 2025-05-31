@@ -1,17 +1,24 @@
 package com.example.movie.data.repository
 
+import android.content.Context
 import com.example.movie.data.local.MovieDAO
 import com.example.movie.data.model.local.ListedContent
 import com.example.movie.data.model.local.Movie
 import com.example.movie.domain.repository.LocalRepository
+import com.example.movie.utils.NotificationHelper
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class LocalRepositoryImpl @Inject constructor(
-    private val dao: MovieDAO
+    private val dao: MovieDAO,
+    @ApplicationContext private val context: Context
 ) : LocalRepository {
 
-    override fun addContent(movie: Movie) = dao.addContent(movie)
+    override fun addContent(movie: Movie) {
+        dao.addContent(movie)
+        NotificationHelper.showMovieAdded(context, movie)
+    }
 
     override fun addContentId(listedContent: ListedContent) = dao.addListedContentId(listedContent)
 

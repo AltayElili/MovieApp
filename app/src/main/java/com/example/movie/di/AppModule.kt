@@ -84,9 +84,13 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideLocalRepository(dao: MovieDAO): LocalRepository {
-        return LocalRepositoryImpl(dao)
+    fun provideLocalRepository(
+        dao: MovieDAO,
+        @ApplicationContext context: Context
+    ): LocalRepository {
+        return LocalRepositoryImpl(dao, context)
     }
+
 
     @Provides
     @Singleton
