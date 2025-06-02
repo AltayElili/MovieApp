@@ -15,6 +15,10 @@ interface MovieRepository {
 
     suspend fun getRatedTvSeries(): Flow<NetworkResponse<TvSeriesResponse>>
 
+    suspend fun getTrendingMovies(): Flow<NetworkResponse<MovieResponse>>
+
+    suspend fun getNowPlayingMovies(): Flow<NetworkResponse<MovieResponse>>
+
     suspend fun searchMovies(query: String): Flow<NetworkResponse<MovieResponse>>
 
     suspend fun searchTvSeries(query: String): Flow<NetworkResponse<TvSeriesResponse>>

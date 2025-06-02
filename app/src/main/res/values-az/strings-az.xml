@@ -3,6 +3,7 @@
     <string name="welcome_description">Gününüzü gözəlləşdirəcək əsrin ən yaxşı film izləmə tətbiqi!</string>
     <string name="welcome_to_mova">Mova-ya xoş gəlmisiniz</string>
     <string name="get_started">Başla</string>
+    <string name="create_account">Hesab yarat</string>
 
     <string name="lets_you_in">Daxil olun</string>
     <string name="continue_with_facebook">Facebook ilə davam et</string>
@@ -32,6 +33,8 @@
     <string name="top_10_movies">Bu həftənin ən yaxşı 10 filmi</string>
     <string name="see_all">Hamısına bax</string>
     <string name="new_releases">Yeni çıxışlar</string>
+    <string name="trending_movies">Trend olan filmlər</string>
+    <string name="now_playing">Baxılanlar</string>
 
     <string name="play_button">İzlə</string>
     <string name="download_button">Yüklə</string>

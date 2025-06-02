@@ -10,31 +10,26 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val repository: MovieRepository) : ViewModel() {
 
     val popularState = MutableLiveData<MovieUiState>()
     val upcomingState = MutableLiveData<MovieUiState>()
-
+    val trendingState = MutableLiveData<MovieUiState>()
+    val nowPlayingState = MutableLiveData<MovieUiState>()
 
     fun getPopularMovies() {
         viewModelScope.launch {
             repository.getPopularMovies().collectLatest {
                 when (it) {
                     is NetworkResponse.Loading -> popularState.value = MovieUiState.Loading
-
-                    is NetworkResponse.Error -> it.message?.let {
-                        popularState.value = MovieUiState.Error(it)
+                    is NetworkResponse.Error -> it.message?.let { msg ->
+                        popularState.value = MovieUiState.Error(msg)
                     }
-
                     is NetworkResponse.Success -> {
-                        popularState.value = it.data?.movies?.let {
-                            MovieUiState.Success(it)
-                        }
-
-                        popularState.value = it.data?.movies?.let {
-                            MovieUiState.ViewPager(it)
+                        it.data?.movies?.let { list ->
+                            popularState.value = MovieUiState.Success(list)
+                            popularState.value = MovieUiState.ViewPager(list)
                         }
                     }
                 }
@@ -47,17 +42,52 @@ class HomeViewModel @Inject constructor(private val repository: MovieRepository)
             repository.getUpcomingMovies().collectLatest {
                 when (it) {
                     is NetworkResponse.Loading -> upcomingState.value = MovieUiState.Loading
-
-                    is NetworkResponse.Error -> it.message?.let {
-                        upcomingState.value = MovieUiState.Error(it)
+                    is NetworkResponse.Error -> it.message?.let { msg ->
+                        upcomingState.value = MovieUiState.Error(msg)
                     }
-
-                    is NetworkResponse.Success -> it.data?.movies?.let {
-                        upcomingState.value = MovieUiState.Success(it)
+                    is NetworkResponse.Success -> {
+                        it.data?.movies?.let { list ->
+                            upcomingState.value = MovieUiState.Success(list)
+                        }
                     }
                 }
             }
         }
     }
 
+    fun getTrendingMovies() {
+        viewModelScope.launch {
+            repository.getTrendingMovies().collectLatest {
+                when (it) {
+                    is NetworkResponse.Loading -> trendingState.value = MovieUiState.Loading
+                    is NetworkResponse.Error -> it.message?.let { msg ->
+                        trendingState.value = MovieUiState.Error(msg)
+                    }
+                    is NetworkResponse.Success -> {
+                        it.data?.movies?.let { list ->
+                            trendingState.value = MovieUiState.Success(list)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    fun getNowPlayingMovies() {
+        viewModelScope.launch {
+            repository.getNowPlayingMovies().collectLatest {
+                when (it) {
+                    is NetworkResponse.Loading -> nowPlayingState.value = MovieUiState.Loading
+                    is NetworkResponse.Error -> it.message?.let { msg ->
+                        nowPlayingState.value = MovieUiState.Error(msg)
+                    }
+                    is NetworkResponse.Success -> {
+                        it.data?.movies?.let { list ->
+                            nowPlayingState.value = MovieUiState.Success(list)
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

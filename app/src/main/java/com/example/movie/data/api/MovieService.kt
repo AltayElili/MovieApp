@@ -13,6 +13,12 @@ import retrofit2.http.Query
 
 interface MovieService {
 
+    @GET("trending/movie/week")
+    suspend fun getTrendingMovies(): Response<MovieResponse>
+
+    @GET("movie/now_playing")
+    suspend fun getNowPlayingMovies(): Response<MovieResponse>
+
     @GET("movie/popular")
     suspend fun getPopularMovies(): Response<MovieResponse>
 

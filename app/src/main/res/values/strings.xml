@@ -33,6 +33,8 @@
     <string name="top_10_movies">Top 10 Movies This Week</string>
     <string name="see_all">See all</string>
     <string name="new_releases">New Releases</string>
+    <string name="trending_movies">Trending Movies</string>
+    <string name="now_playing">Now Playing</string>
 
     <string name="play_button">Play</string>
     <string name="download_button">Download</string>

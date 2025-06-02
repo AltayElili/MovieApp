@@ -21,8 +21,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private val viewModel by viewModels<HomeViewModel>()
     private val listViewModel by activityViewModels<ListViewModel>()
+
     private val topRatedAdapter = MovieAdapter()
     private val upcomingAdapter = MovieAdapter()
+    private val trendingAdapter = MovieAdapter()
+    private val nowPlayingAdapter = MovieAdapter()
+
     private val viewPagerAdapter = HomePagerAdapter { movie, action ->
         when (action) {
             HeroAction.PLAY -> {
@@ -43,16 +47,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setAdapters()
         observeData()
         getMovies()
         setupClicks()
-
     }
-
 
     private fun observeData() {
         viewModel.popularState.observe(viewLifecycleOwner) {
@@ -61,15 +62,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 is MovieUiState.Loading -> binding.progressBarTop10.visible()
                 is MovieUiState.Error -> showFancyToast(it.message, FancyToast.ERROR)
                 is MovieUiState.Success -> {
-                    topRatedAdapter.submitList(
-                        it.movieList.take(
-                            10
-                        )
-                    )
-                    val popularList = it.movieList
-                    goToSeeAllTopRated(popularList.toTypedArray())
+                    topRatedAdapter.submitList(it.movieList.take(10))
+                    goToSeeAllTopRated(it.movieList.toTypedArray())
                 }
-
                 is MovieUiState.ViewPager -> viewPagerAdapter.submitList(it.details.take(3))
                 else -> Unit
             }
@@ -79,44 +74,70 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             binding.progressBarNew.gone()
             when (it) {
                 is MovieUiState.Loading -> binding.progressBarNew.visible()
-                is MovieUiState.Error -> showFancyToast(
-                    it.message,
-                    FancyToast.ERROR
-                )
-
+                is MovieUiState.Error -> showFancyToast(it.message, FancyToast.ERROR)
                 is MovieUiState.Success -> {
-                    upcomingAdapter.submitList(
-                        it.movieList.take(
-                            10
-                        )
-                    )
-                    val upcomingList = it.movieList
-                    goToSeeAllUpcoming(
-                        upcomingList.toTypedArray()
-                    )
+                    upcomingAdapter.submitList(it.movieList.take(10))
+                    goToSeeAllUpcoming(it.movieList.toTypedArray())
                 }
-
                 else -> Unit
             }
         }
-    }
 
-    private fun goToSeeAllUpcoming(list: Array<Movie>) {
-        binding.buttonSeeAllUpcoming.setOnClickListener {
-            findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToViewAllFragment(
-                    list, "upcoming"
-                )
-            )
+        viewModel.trendingState.observe(viewLifecycleOwner) {
+            binding.progressBarTrending.gone()
+            when (it) {
+                is MovieUiState.Loading -> binding.progressBarTrending.visible()
+                is MovieUiState.Error -> showFancyToast(it.message, FancyToast.ERROR)
+                is MovieUiState.Success -> {
+                    trendingAdapter.submitList(it.movieList.take(10))
+                    goToSeeAllTrending(it.movieList.toTypedArray())
+                }
+                else -> Unit
+            }
+        }
+
+        viewModel.nowPlayingState.observe(viewLifecycleOwner) {
+            binding.progressBarNowPlaying.gone()
+            when (it) {
+                is MovieUiState.Loading -> binding.progressBarNowPlaying.visible()
+                is MovieUiState.Error -> showFancyToast(it.message, FancyToast.ERROR)
+                is MovieUiState.Success -> {
+                    nowPlayingAdapter.submitList(it.movieList.take(10))
+                    goToSeeAllNowPlaying(it.movieList.toTypedArray())
+                }
+                else -> Unit
+            }
         }
     }
 
     private fun goToSeeAllTopRated(list: Array<Movie>) {
         binding.buttonSeeAllPopular.setOnClickListener {
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToViewAllFragment(
-                    list, "topRated"
-                )
+                HomeFragmentDirections.actionHomeFragmentToViewAllFragment(list, "topRated")
+            )
+        }
+    }
+
+    private fun goToSeeAllUpcoming(list: Array<Movie>) {
+        binding.buttonSeeAllUpcoming.setOnClickListener {
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToViewAllFragment(list, "upcoming")
+            )
+        }
+    }
+
+    private fun goToSeeAllTrending(list: Array<Movie>) {
+        binding.buttonSeeAllTrending.setOnClickListener {
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToViewAllFragment(list, "trending")
+            )
+        }
+    }
+
+    private fun goToSeeAllNowPlaying(list: Array<Movie>) {
+        binding.buttonSeeAllNowPlaying.setOnClickListener {
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToViewAllFragment(list, "nowPlaying")
             )
         }
     }
@@ -124,6 +145,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private fun setAdapters() {
         binding.rvTop10.adapter = topRatedAdapter
         binding.rvNewReleases.adapter = upcomingAdapter
+        binding.rvTrending.adapter = trendingAdapter
+        binding.rvNowPlaying.adapter = nowPlayingAdapter
         binding.viewPagerHome.adapter = viewPagerAdapter
     }
 
@@ -138,12 +161,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 HomeFragmentDirections.actionHomeFragmentToDetailFragment(true, id)
             )
         }
+        trendingAdapter.onClick = { id, _ ->
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToDetailFragment(true, id)
+            )
+        }
+        nowPlayingAdapter.onClick = { id, _ ->
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToDetailFragment(true, id)
+            )
+        }
     }
 
     private fun getMovies() {
         viewModel.getPopularMovies()
         viewModel.getUpcomingMovies()
+        viewModel.getTrendingMovies()
+        viewModel.getNowPlayingMovies()
     }
-
-
 }

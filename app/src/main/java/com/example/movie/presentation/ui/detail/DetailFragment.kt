@@ -56,7 +56,6 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
         binding.buttonDetailDownload.setOnClickListener {
             checkPermissionAndDownload()
         }
-        binding.buttonDetailDownload.setOnClickListener { checkPermissionAndDownload() }
         binding.imageView17.setOnClickListener { showCastBottomSheet() }
     }
 
@@ -86,14 +85,14 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
         dialog.show()
     }
 
-private fun blurBackground(enable: Boolean) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-        binding.root.setRenderEffect(
-            if (enable) RenderEffect.createBlurEffect(25f, 25f, Shader.TileMode.CLAMP) else null
-        )
+    private fun blurBackground(enable: Boolean) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            binding.root.setRenderEffect(
+                if (enable) RenderEffect.createBlurEffect(25f, 25f, Shader.TileMode.CLAMP) else null
+            )
+        }
+        binding.viewBlurOverlay.visibility = if (enable) View.VISIBLE else View.GONE
     }
-    binding.viewBlurOverlay.visibility = if (enable) View.VISIBLE else View.GONE
-}
 
     private fun tabMediator() {
         TabLayoutMediator(binding.tabLayout, binding.tabsViewPager) { tab, position ->

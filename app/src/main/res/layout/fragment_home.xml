@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="movie"
             type="com.example.movie.data.model.remote.Movie" />
@@ -15,14 +14,12 @@
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/primary_background_color"
             android:paddingBottom="95dp"
-            tools:context=".presentation.ui.details.auth.home.HomeFragment">
-
+            tools:context=".presentation.ui.home.HomeFragment">
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPagerHome"
@@ -31,7 +28,6 @@
                 android:src="@drawable/home_main"
                 app:layout_constraintBottom_toTopOf="@+id/guidelineImg"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
@@ -41,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.43" />
+                app:layout_constraintGuide_percent="0.24" />
 
             <TextView
                 android:id="@+id/textViewTop10"
@@ -81,6 +77,19 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/buttonSeeAllPopular" />
+
+            <ProgressBar
+                android:id="@+id/progressBarTop10"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminateTint="#ee12"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/rvTop10"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/rvTop10" />
 
             <TextView
                 android:id="@+id/textViewNewReleases"
@@ -122,19 +131,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/buttonSeeAllUpcoming" />
 
             <ProgressBar
-                android:id="@+id/progressBarTop10"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:indeterminateTint="#ee12"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@+id/rvTop10"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/rvTop10" />
-
-            <ProgressBar
                 android:id="@+id/progressBarNew"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
@@ -146,6 +142,111 @@
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/rvNewReleases" />
+
+            <TextView
+                android:id="@+id/textViewTrending"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/urbanist_bold"
+                android:text="@string/trending_movies"
+                android:textColor="@color/primary_textview_color"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvNewReleases" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonSeeAllTrending"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/urbanist_semibold"
+                android:text="@string/see_all"
+                android:textColor="#E21221"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewTrending"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textViewTrending" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTrending"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonSeeAllTrending" />
+
+            <ProgressBar
+                android:id="@+id/progressBarTrending"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminateTint="#ee12"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/rvTrending"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/rvTrending" />
+
+            <TextView
+                android:id="@+id/textViewNowPlaying"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/urbanist_bold"
+                android:text="@string/now_playing"
+                android:textColor="@color/primary_textview_color"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvTrending" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonSeeAllNowPlaying"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/urbanist_semibold"
+                android:text="@string/see_all"
+                android:textColor="#E21221"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewNowPlaying"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textViewNowPlaying" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvNowPlaying"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonSeeAllNowPlaying" />
+
+            <ProgressBar
+                android:id="@+id/progressBarNowPlaying"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminateTint="#ee12"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/rvNowPlaying"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/rvNowPlaying" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>
