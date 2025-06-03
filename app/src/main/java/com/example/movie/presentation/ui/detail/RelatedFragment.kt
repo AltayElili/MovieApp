@@ -3,6 +3,8 @@ package com.example.movie.presentation.ui.detail
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movie.db.BaseFragment
 import com.example.movie.databinding.FragmentRelatedBinding
 import com.example.movie.presentation.ui.home.MovieAdapter
@@ -16,12 +18,23 @@ import dagger.hilt.android.AndroidEntryPoint
 class RelatedFragment(private val movieId: String, private val isMovie: Boolean) :
     BaseFragment<FragmentRelatedBinding>(FragmentRelatedBinding::inflate) {
 
-    private val viewModel by viewModels<DetailViewModel>()
+    private val viewModel: DetailViewModel by viewModels({ requireParentFragment() })
     private val adapter = MovieAdapter(true)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.rvRelated.adapter = adapter
+
+        binding.rvRelated.apply {
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            adapter = this@RelatedFragment.adapter
+        }
+
+        adapter.onClick = { id, _ ->
+            requireParentFragment().findNavController()
+                .navigate(DetailFragmentDirections.actionDetailFragmentSelf(id, isMovie))
+            viewModel.clearStates()
+        }
         observeData()
         getRecommendations()
     }

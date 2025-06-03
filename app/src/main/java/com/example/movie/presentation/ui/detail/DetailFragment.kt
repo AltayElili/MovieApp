@@ -27,8 +27,11 @@ import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 import android.graphics.RenderEffect
 import android.graphics.Shader
+import android.util.Log
 import android.view.WindowManager
 import android.widget.ImageView
+import com.example.movie.presentation.ui.home.MovieAdapter
+import com.example.movie.presentation.ui.home.MovieUiState
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
@@ -39,6 +42,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
     private val detailViewModel by viewModels<DetailViewModel>()
     private val listViewModel by activityViewModels<ListViewModel>()
     private val actorsAdapter = ActorsAdapter()
+    private val relatedAdapter = MovieAdapter()
     private var isButtonChecked: Boolean = false
     private val detailPagerAdapter by lazy { DetailPagerAdapter(this, args.id, args.isMovie) }
     private val SAMPLE_VIDEO =
@@ -57,6 +61,14 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
             checkPermissionAndDownload()
         }
         binding.imageView17.setOnClickListener { showCastBottomSheet() }
+
+        relatedAdapter.onClick = { id, isMovie ->
+            Log.d("RELATED_CLICK", "Clicked Related Movie: $id, isMovie: $isMovie")
+            findNavController().navigate(
+                DetailFragmentDirections.actionDetailFragmentSelf(id,isMovie)
+            )
+            detailViewModel.clearStates()
+        }
     }
 
     private fun showCastBottomSheet() {
@@ -147,7 +159,6 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
                     it.message,
                     FancyToast.ERROR
                 )
-
                 is DetailViewModel.MovieDetailUiState.DetailSuccess -> {
                     val movieDetails = it.movieDetail
                     binding.movie = movieDetails
@@ -160,6 +171,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
                 }
             }
         }
+
         detailViewModel.tvDetailState.observe(viewLifecycleOwner) {
             binding.animationView.gone()
             when (it) {
@@ -168,7 +180,6 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
                     it.message,
                     FancyToast.ERROR
                 )
-
                 is DetailViewModel.TvDetailUiState.TvDetailSuccess -> {
                     val tvSeriesDetails = it.tvDetail
                     binding.tvSeries = tvSeriesDetails
@@ -178,10 +189,10 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
                         tvSeriesDetails.name,
                         tvSeriesDetails.id
                     )
-
                 }
             }
         }
+
         detailViewModel.movieActorState.observe(viewLifecycleOwner) {
             binding.animationViewActors.gone()
             when (it) {
@@ -190,7 +201,6 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
                     it.message,
                     FancyToast.ERROR
                 )
-
                 is DetailViewModel.ActorUiState.ActorSuccess -> {
                     val movieActors = it.detail.cast
                     if (movieActors.isNullOrEmpty()) {
@@ -199,6 +209,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
                 }
             }
         }
+
         detailViewModel.tvActorState.observe(viewLifecycleOwner) {
             binding.animationViewActors.gone()
             when (it) {
@@ -207,7 +218,6 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
                     it.message,
                     FancyToast.ERROR
                 )
-
                 is DetailViewModel.ActorUiState.ActorSuccess -> {
                     val tvActors = it.detail.cast
                     if (tvActors.isNullOrEmpty()) {
@@ -216,6 +226,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
                 }
             }
         }
+
         detailViewModel.isContentInList.observe(viewLifecycleOwner) {
             if (it == 1) {
                 isButtonChecked = true
@@ -225,6 +236,18 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
                 binding.buttonAddToList.isChecked = isButtonChecked
             }
         }
+
+        detailViewModel.relatedMovieState.observe(viewLifecycleOwner) {
+            when (it) {
+                is MovieUiState.Success -> {
+                    relatedAdapter.submitList(it.movieList)
+                }
+                is MovieUiState.Error -> showFancyToast(it.message, FancyToast.ERROR)
+                is MovieUiState.Loading -> binding.animationView.visible()
+                else -> {}
+            }
+        }
+
         binding.imageView9.setOnClickListener {
             val shareText = if (args.isMovie) {
                 "Check out this movie: ${binding.movie?.originalTitle}\n\nhttps://www.themoviedb.org/movie/${args.id}"
@@ -255,6 +278,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
     private fun setAdapters() {
         binding.rvActors.adapter = actorsAdapter
         binding.tabsViewPager.adapter = detailPagerAdapter
+        binding.rvRelatedMovies.adapter = relatedAdapter
     }
 
     private fun setMovieDetails() {
@@ -325,5 +349,9 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
             }
 
         }
+    }
+    override fun onResume() {
+        super.onResume()
+        getData()
     }
 }

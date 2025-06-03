@@ -121,13 +121,13 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>(FragmentExploreBind
 
         movieSearchAdapter.onClick = { id, _ ->
             findNavController().navigate(
-                ExploreFragmentDirections.actionExploreFragmentToDetailFragment(true, id)
+                ExploreFragmentDirections.actionExploreFragmentToDetailFragment(id, true)
             )
         }
 
         tvSearchAdapter.onClick = { id, _ ->
             findNavController().navigate(
-                ExploreFragmentDirections.actionExploreFragmentToDetailFragment(false, id)
+                ExploreFragmentDirections.actionExploreFragmentToDetailFragment(id, false)
             )
         }
     }

@@ -44,10 +44,8 @@ class MovieAdapter(private val isLargeItem: Boolean = false) :
             is DefaultMovieItemBinding -> {
                 holder.movieItemBinding.movie = data
                 holder.movieItemBinding.defaultMovieCard.setOnClickListener {
-                    data.id?.let { id ->
-                        if (this::onClick.isInitialized) {
-                            onClick(id.toString(), data.isMovie)
-                        }
+                    if (data.id != null && this::onClick.isInitialized) {
+                        onClick.invoke(data.id.toString(), data.isMovie)
                     }
                 }
             }
@@ -55,15 +53,14 @@ class MovieAdapter(private val isLargeItem: Boolean = false) :
             is LargeMovieItemBinding -> {
                 holder.movieItemBinding.movie = data
                 holder.movieItemBinding.largeMovieCard.setOnClickListener {
-                    data.id?.let { id ->
-                        if (this::onClick.isInitialized) {
-                            onClick(id.toString(), data.isMovie)
-                        }
+                    if (data.id != null && this::onClick.isInitialized) {
+                        onClick(data.id.toString(), data.isMovie)
                     }
                 }
             }
         }
     }
+
 
     class MovieDiffCallback : ItemCallback<Movie>() {
         override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {

@@ -120,6 +120,7 @@
             android:id="@+id/action_notificationFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.movie.presentation.ui.detail.DetailFragment"
@@ -127,11 +128,22 @@
         tools:layout="@layout/fragment_detail">
         <argument
             android:name="id"
-            android:defaultValue="test"
             app:argType="string" />
         <argument
             android:name="isMovie"
             app:argType="boolean" />
+        <action
+            android:id="@+id/action_detailFragment_self"
+            app:destination="@id/detailFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/detailFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_detailFragment_self2"
+            app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_detailFragment_to_moreLikeThisFragment"
+            app:destination="@id/moreLikeThisFragment" />
     </fragment>
     <fragment
         android:id="@+id/exploreFragment"
@@ -241,4 +253,8 @@
             android:id="@+id/action_paymentFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/moreLikeThisFragment"
+        android:name="com.example.movie.presentation.ui.detail.more.MoreLikeThisFragment"
+        android:label="MoreLikeThisFragment" />
 </navigation>

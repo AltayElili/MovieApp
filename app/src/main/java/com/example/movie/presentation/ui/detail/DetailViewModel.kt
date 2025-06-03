@@ -171,6 +171,15 @@ class DetailViewModel @Inject constructor(
 
 
 
+    fun clearStates() {
+        movieDetailState.postValue(null)
+        tvDetailState.postValue(null)
+        movieActorState.postValue(null)
+        tvActorState.postValue(null)
+        relatedMovieState.postValue(null)
+        relatedTvState.postValue(null)
+    }
+
     fun getMovieReviews(id: String) {
         viewModelScope.launch {
             repository.getMovieReviews(id).collectLatest {

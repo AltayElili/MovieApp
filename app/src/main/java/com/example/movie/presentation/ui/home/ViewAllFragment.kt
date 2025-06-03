@@ -35,7 +35,7 @@ class ViewAllFragment : BaseFragment<FragmentViewAllBinding>(FragmentViewAllBind
         adapter.onClick = { id, _ ->
             findNavController().navigate(
                 ViewAllFragmentDirections.actionViewAllFragmentToDetailFragment(
-                    true, id
+                    id, true
                 )
             )
         }

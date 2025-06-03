@@ -153,25 +153,27 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private fun setupClicks() {
         topRatedAdapter.onClick = { id, _ ->
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToDetailFragment(true, id)
+                HomeFragmentDirections.actionHomeFragmentToDetailFragment(id, true)
             )
         }
         upcomingAdapter.onClick = { id, _ ->
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToDetailFragment(true, id)
+                HomeFragmentDirections.actionHomeFragmentToDetailFragment(id, true)
             )
         }
         trendingAdapter.onClick = { id, _ ->
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToDetailFragment(true, id)
+                HomeFragmentDirections.actionHomeFragmentToDetailFragment(id, true)
             )
         }
         nowPlayingAdapter.onClick = { id, _ ->
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToDetailFragment(true, id)
+                HomeFragmentDirections.actionHomeFragmentToDetailFragment(id, true)
             )
         }
     }
+
+
 
     private fun getMovies() {
         viewModel.getPopularMovies()
