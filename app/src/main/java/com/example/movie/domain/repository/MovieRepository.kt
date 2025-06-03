@@ -40,4 +40,6 @@ interface MovieRepository {
     suspend fun getTvSeriesReviews(id: String): Flow<NetworkResponse<ReviewResponse>>
 
     suspend fun getNotifications(): QuerySnapshot
+
+    suspend fun getMovieTrailerKey(id: String): String?
 }

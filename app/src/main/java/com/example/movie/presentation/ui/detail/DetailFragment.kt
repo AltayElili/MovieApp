@@ -52,7 +52,6 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setAdapters()
-        observeData()
         tabMediator()
         getData()
         setupClicks()
@@ -69,6 +68,14 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
             )
             detailViewModel.clearStates()
         }
+        binding.buttonDetailPlay.setOnClickListener {
+//            val youtubeUrl = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+//            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl))
+//            intent.putExtra("force_fullscreen", true)
+//            startActivity(intent)
+            detailViewModel.loadTrailer(args.id)
+        }
+        observeData()
     }
 
     private fun showCastBottomSheet() {
@@ -260,12 +267,15 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
             intent.putExtra(Intent.EXTRA_TEXT, shareText)
             startActivity(Intent.createChooser(intent, "Share via"))
         }
-
-        binding.buttonDetailPlay.setOnClickListener {
-            val youtubeUrl = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl))
-            intent.putExtra("force_fullscreen", true)
-            startActivity(intent)
+        detailViewModel.trailerKey.observe(viewLifecycleOwner) { key ->
+            if (key != null) {
+                val youtubeUrl = "https://www.youtube.com/watch?v=$key"
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl))
+                intent.putExtra("force_fullscreen", true)
+                startActivity(intent)
+            } else {
+                showFancyToast("Trailer tapılmadı", FancyToast.INFO)
+            }
         }
     }
 

@@ -1,4 +1,4 @@
-package com.example.movie.api
+package com.example.movie.data.api
 
 import com.example.movie.data.model.remote.ActorResponse
 import com.example.movie.data.model.remote.DetailResponse
@@ -6,6 +6,7 @@ import com.example.movie.data.model.remote.MovieResponse
 import com.example.movie.data.model.remote.ReviewResponse
 import com.example.movie.data.model.remote.TvDetailsResponse
 import com.example.movie.data.model.remote.TvSeriesResponse
+import com.example.movie.data.model.remote.VideoResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -48,9 +49,9 @@ interface MovieService {
 
     @GET("movie/{id}/videos")
     suspend fun getMovieVideosById(
-        @Path("id") movie_id:Long,
-        @Query("language") lan:String="en-US"
-    ): Response<MovieResponse>
+        @Path("id") movieId: Long,
+        @Query("language") lang: String = "en-US"
+    ): Response<VideoResponse>
 
     @GET("tv/{id}/credits")
     suspend fun getTvActors(@Path("id") id: String): Response<ActorResponse>

@@ -1,6 +1,6 @@
 package com.example.movie.data.repository
 
-import com.example.movie.api.MovieService
+import com.example.movie.data.api.MovieService
 import com.example.movie.data.api.NetworkResponse
 import com.example.movie.data.model.remote.MovieResponse
 import com.example.movie.data.model.remote.TvSeriesResponse
@@ -72,6 +72,18 @@ class MovieRepositoryImpl @Inject constructor(
         return fireStore.collection("movieNotifications").get().await()
     }
 
+    override suspend fun getMovieTrailerKey(id: String): String? {
+        return try {
+            val response = service.getMovieVideosById(id.toLong())
+            if (response.isSuccessful) {
+                response.body()?.results
+                    ?.firstOrNull { it.site == "YouTube" && it.type == "Trailer" }
+                    ?.key
+            } else null
+        } catch (e: Exception) {
+            null
+        }
+    }
 
     private fun <T> safeApiRequest(apicall: suspend () -> Response<T>): Flow<NetworkResponse<T>> =
         flow<NetworkResponse<T>> {

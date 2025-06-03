@@ -3,8 +3,8 @@ package com.example.movie.di
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
-import com.example.movie.api.MovieService
 import com.example.movie.api.TokenInterceptor
+import com.example.movie.data.api.MovieService
 import com.example.movie.data.local.MovieDAO
 import com.example.movie.data.repository.AuthRepositoryImpl
 import com.example.movie.data.repository.LocalRepositoryImpl

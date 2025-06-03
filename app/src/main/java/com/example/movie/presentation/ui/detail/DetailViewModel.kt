@@ -1,5 +1,6 @@
 package com.example.movie.presentation.ui.detail
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -34,6 +35,12 @@ class DetailViewModel @Inject constructor(
     val tvReviewState = MutableLiveData<ReviewUiState>()
     val isContentInList = MutableLiveData<Int>()
 
+    private val _trailerKey = MutableLiveData<String?>()
+    val trailerKey: LiveData<String?> = _trailerKey
+
+    fun loadTrailer(id: String) = viewModelScope.launch {
+        _trailerKey.value = repository.getMovieTrailerKey(id)
+    }
 
     fun getMovieDetails(id: String) {
         viewModelScope.launch {
@@ -53,6 +60,10 @@ class DetailViewModel @Inject constructor(
 
             }
         }
+    }
+
+    fun consumeTrailerKey() {
+        _trailerKey.value = null
     }
 
     fun getTvSeriesDetails(id: String) {

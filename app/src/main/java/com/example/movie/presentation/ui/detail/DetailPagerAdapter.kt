@@ -15,7 +15,7 @@ class DetailPagerAdapter(
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> RelatedFragment(movieId, isMovie)
+            0 -> RelatedFragment.newInstance(movieId, isMovie)
             1 -> ReviewFragment(movieId, isMovie)
             else -> throw IllegalStateException("Invalid position")
         }

@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.movie.db.BaseFragment
 import com.example.movie.databinding.FragmentHomeBinding
 import com.example.movie.data.model.remote.Movie
+import com.example.movie.presentation.ui.detail.DetailViewModel
 import com.example.movie.presentation.ui.list.ListViewModel
 import com.example.movie.utils.gone
 import com.example.movie.utils.visible
@@ -21,6 +22,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private val viewModel by viewModels<HomeViewModel>()
     private val listViewModel by activityViewModels<ListViewModel>()
+    private val detailViewModel by activityViewModels<DetailViewModel>()
 
     private val topRatedAdapter = MovieAdapter()
     private val upcomingAdapter = MovieAdapter()
@@ -30,8 +32,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private val viewPagerAdapter = HomePagerAdapter { movie, action ->
         when (action) {
             HeroAction.PLAY -> {
-                val url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+                movie.id?.let {
+                    detailViewModel.loadTrailer(it.toString())
+                } ?: showFancyToast("Trailer üçün ID tapılmadı", FancyToast.WARNING)
+//                val url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+//                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
             }
             HeroAction.ADD -> {
                 listViewModel.toggleContent(movie) { added ->
@@ -53,6 +58,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         observeData()
         getMovies()
         setupClicks()
+
+        detailViewModel.trailerKey.observe(viewLifecycleOwner) { key ->
+            if (key == null) return@observe
+
+            if (key.isNotEmpty()) {
+                val url = "https://www.youtube.com/watch?v=$key"
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+            } else {
+                showFancyToast("Trailer tapılmadı", FancyToast.INFO)
+            }
+            detailViewModel.consumeTrailerKey()
+        }
     }
 
     private fun observeData() {
@@ -106,6 +123,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                     goToSeeAllNowPlaying(it.movieList.toTypedArray())
                 }
                 else -> Unit
+            }
+        }
+        detailViewModel.trailerKey.observe(viewLifecycleOwner) { key ->
+            if (key != null) {
+                val youtubeUrl = "https://www.youtube.com/watch?v=$key"
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl)))
+                detailViewModel.consumeTrailerKey()
             }
         }
     }
