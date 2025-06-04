@@ -16,7 +16,6 @@ object NotificationHelper {
     private const val CHANNEL_DESC = "Notifies when a movie is added to your list"
     private const val NOTIFICATION_ID = 101
 
-    /** App start-da çağırılır. */
     fun createChannel(context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
@@ -28,10 +27,9 @@ object NotificationHelper {
         }
     }
 
-    /** Filmi siyahıya əlavə edəndən dərhal sonra çağırılır. */
     fun showMovieAdded(context: Context, movie: Movie) {
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.add)       // öz icon-unuzu qoyun
+            .setSmallIcon(R.drawable.add)
             .setContentTitle("Added to list")
             .setContentText(movie.title)
             .setAutoCancel(true)

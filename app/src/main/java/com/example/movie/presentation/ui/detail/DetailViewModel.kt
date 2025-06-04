@@ -180,8 +180,6 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-
-
     fun clearStates() {
         movieDetailState.postValue(null)
         tvDetailState.postValue(null)
