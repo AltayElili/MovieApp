@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Mova</string>
+    <string name="app_name">Netflix</string>
     <string name="welcome_description">Gününüzü gözəlləşdirəcək əsrin ən yaxşı film izləmə tətbiqi!</string>
-    <string name="welcome_to_mova">Mova-ya xoş gəlmisiniz</string>
+    <string name="welcome_to_netflix">Netflixə xoş gəlmisiniz</string>
     <string name="get_started">Başla</string>
     <string name="create_account">Hesab yarat</string>
 
@@ -54,12 +54,19 @@
     <string name="dark_mode">Qaranlıq rejim</string>
     <string name="help_center">Yardım mərkəzi</string>
     <string name="privacy_policy">Məxfilik siyasəti</string>
-    <string name="what_is_mova">Mova istifadəçilərə həm filmləri, həm də serialları ətraflı araşdırmağa, sevdiklərini siyahıya əlavə etməyə imkan verən bir platformadır.</string>
+    <string name="what_is_movie">Netflix istifadəçilərə həm filmləri, həm də serialları ətraflı araşdırmağa, sevdiklərini siyahıya əlavə etməyə imkan verən bir platformadır.</string>
     <string name="how_to_delete_content">Filmi və ya serialı siyahıdan silmək üçün onun üzərinə klikləyin və təsdiq pəncərəsində “Bəli” düyməsinə basın.</string>
     <string name="how_to_add_content">Siyahıya əlavə etmək üçün detal səhifəsindəki “siyahı” ikonuna klikləyin.</string>
     <string name="how_to_change_user_info">Profil bölməsində “Profili redaktə et” düyməsini klikləyin.</string>
     <string name="lorem">Sadəcə nümunə mətnidir, dəyişdirilə bilər.</string>
     <string name="privacy_lorem">Bu, məxfilik siyasəti üçün nümunə mətnidir. Buraya real məlumatlar daxil edilməlidir.</string>
+    <string name="faq_what_is_netflix">Netflix nədir?</string>
+    <string name="faq_how_to_add">Siyahıya necə məzmun əlavə edə bilərəm?</string>
+    <string name="faq_how_to_delete">Siyahıdan məzmunu necə silə bilərəm?</string>
+    <string name="faq_how_to_change_user">İstifadəçi məlumatlarımı necə dəyişə bilərəm?</string>
+    <string name="faq_how_to_subscribe">Premium abunəliyə necə keçə bilərəm?</string>
+    <string name="faq_how_to_contact">Müştəri dəstəyi ilə necə əlaqə saxlaya bilərəm?</string>
+    <string name="faq_payment_methods">Hansı ödəniş üsulları qəbul edilir?</string>
 
     <string name="imdb_rating">IMDB Reytinqi</string>
     <string name="release_date">Buraxılış tarixi</string>
@@ -93,6 +100,7 @@
     <string name="explore">Kəşf et</string>
 
     <string-array name="countries_array">
+        <item>Azerbaycan</item>
         <item>Amerika Birləşmiş Ştatları</item>
         <item>Kanada</item>
         <item>Birləşmiş Krallıq</item>

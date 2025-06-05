@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Movie</string>
     <string name="welcome_description">The best movie streaming app of the century to make your days great!</string>
-    <string name="welcome_to_mova">"Welcome to Movie"</string>
+    <string name="welcome_to_netflix">"Welcome to Netflix"</string>
     <string name="get_started">"Get Started"</string>
     <string name="create_account">Create Your Account</string>
 
@@ -54,12 +54,20 @@
     <string name="dark_mode">Dark Mode</string>
     <string name="help_center">Help Center</string>
     <string name="privacy_policy">Privacy Policy</string>
-    <string name="what_is_mova">Mova is a platform where users can explore and discover both movies and TV series in detail, while also allowing them to create and manage their own personalized content lists.</string>
+    <string name="what_is_movie">Netflix is a platform where users can explore and discover both movies and TV series in detail, while also allowing them to create and manage their own personalized content lists.</string>
     <string name="how_to_delete_content">To delete a movie or TV series from the list, simply tap on the item in the list screen. A confirmation window will appear; click "Yes" to confirm the deletion.</string>
     <string name="how_to_add_content">To add content to the list, simply click on the "list" icon in the content details screen.</string>
     <string name="how_to_change_user_info">You can change your user information by clicking on "Edit Profile" in the Profile section.</string>
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore</string>
     <string name="privacy_lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</string>
+    <string name="faq_what_is_netflix">What is Netflix?</string>
+    <string name="faq_how_to_add">How do I add content to the list?</string>
+    <string name="faq_how_to_delete">How do I delete content from the list?</string>
+    <string name="faq_how_to_change_user">How do I change my user information?</string>
+    <string name="faq_how_to_subscribe">How do I subscribe to premium?</string>
+    <string name="faq_how_to_contact">How can I contact customer support?</string>
+    <string name="faq_payment_methods">What payment methods are accepted?</string>
+
 
     <string name="imdb_rating">IMDB Rating</string>
     <string name="release_date">Release Date</string>
@@ -94,6 +102,7 @@
     <string name="explore">Explore</string>
 
     <string-array name="countries_array">
+        <item>Azerbaijan</item>
         <item>United States</item>
         <item>Canada</item>
         <item>United Kingdom</item>
@@ -110,7 +119,6 @@
         <item>English</item>
         <item>Azərbaycan</item>
     </string-array>
-
 
 
     <string-array name="gender_array">

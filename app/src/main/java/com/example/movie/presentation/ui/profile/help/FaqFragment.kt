@@ -35,19 +35,13 @@ class FaqFragment : BaseFragment<FragmentFaqBinding>(FragmentFaqBinding::inflate
     private fun getFaqList() {
         faqAdapter.submitList(
             listOf(
-                FAQ("What is Mova?", getString(R.string.what_is_mova)),
-                FAQ("How do I add content to the list?", getString(R.string.how_to_add_content)),
-                FAQ(
-                    "How do I delete content from the list?",
-                    getString(R.string.how_to_delete_content)
-                ),
-                FAQ(
-                    "How do I change my user information?",
-                    getString(R.string.how_to_change_user_info)
-                ),
-                FAQ("How do I subscribe to premium?", getString(R.string.lorem)),
-                FAQ("How can I contact customer support?", getString(R.string.lorem)),
-                FAQ("What payment methods are accepted?", getString(R.string.lorem)),
+                FAQ(getString(R.string.faq_what_is_netflix), getString(R.string.what_is_movie)),
+                FAQ(getString(R.string.faq_how_to_add), getString(R.string.how_to_add_content)),
+                FAQ(getString(R.string.faq_how_to_delete), getString(R.string.how_to_delete_content)),
+                FAQ(getString(R.string.faq_how_to_change_user), getString(R.string.how_to_change_user_info)),
+                FAQ(getString(R.string.faq_how_to_subscribe), getString(R.string.lorem)),
+                FAQ(getString(R.string.faq_how_to_contact), getString(R.string.lorem)),
+                FAQ(getString(R.string.faq_payment_methods), getString(R.string.lorem))
             )
         )
     }

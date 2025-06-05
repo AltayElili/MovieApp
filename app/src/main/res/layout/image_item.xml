@@ -39,7 +39,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
-            android:id="@+id/imageViewMovaa"
+            android:id="@+id/imageViewMoviee"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginStart="24dp"
